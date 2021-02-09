@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Zorin-PingGuo-Grey
+Comment=The light desktop theme with grey highlights for Zorin OS
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Zorin-PingGuo-Grey
+MetacityTheme=Zorin-PingGuo-Grey
+IconTheme=Zorin-PingGuo-Grey
+CursorTheme=Adwaita
+ButtonLayout=:minimize,maximize,close
