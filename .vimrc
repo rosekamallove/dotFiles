@@ -12,7 +12,8 @@ nnoremap <C-Right> :vertical resize -2<CR>
 noremap ter :botright vert terminal<CR>
 noremap splr :botright vert split<CR>
 noremap bcpp :r ~/.vim/templates/basic.cpp<CR>
-noremap ccpp :r ~/.vim/templates/code.cpp<CR>
+noremap bnrsrch :r ~/.vim/templates/implementations/binarySearch.cpp<CR>
+
 noremap sv :w<CR>
 colorscheme gruvbox
 set background=dark
@@ -25,6 +26,7 @@ call plug#begin()
         Plug 'Yggdroot/indentLine'
         Plug 'Xuyuanp/nerdtree-git-plugin'
         Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+	Plug 'wakatime/vim-wakatime'
 	Plug 'bling/vim-airline'
 	Plug 'ervandew/supertab'
 	Plug 'kien/rainbow_parentheses.vim'
@@ -39,6 +41,7 @@ call plug#begin()
         Plug 'severin-lemaignan/vim-minimap'
         Plug 'airblade/vim-gitgutter'
         Plug 'vim-airline/vim-airline-themes'
+	Plug 'neoclide/coc.nvim', {'branch':'release'}
   
 "    Plug 'itchyny/lightline.vim'
 call plug#end()
@@ -104,10 +107,9 @@ autocmd FileType cpp nnoremap     <leader>rr    :!./%:r<CR>
 autocmd FileType cpp nnoremap     <leader>rt    :!for f in %:r.*.test; do echo "TEST: $f"; ./%:r < $f; done<CR>
 
 
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-
-" Highlight currently open buffer in NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"=> COC
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:coc_global_extensions = [
   \ 'coc-snippets',
@@ -115,8 +117,11 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ 'coc-json',
   \ 'coc-python',
-  \ 'coc-vimlsp'
+  \ 'coc-vimlsp',
+  \ 'coc-pairs'
   \ ]
+
+autocmd FileType cpp let b:coc_pairs_disabled = ["<"]
 
 
 " Highlight currently open buffer in NERDTree

@@ -5,12 +5,12 @@ set cpo&vim
 inoremap <silent> <expr> <Plug>(coc-snippets-expand-jump) coc#_insert_key('notify', 'snippets-expand-jump', 1)
 inoremap <silent> <expr> <Plug>(coc-snippets-expand) coc#_insert_key('notify', 'snippets-expand', 1)
 inoremap <silent> <expr> <BS> coc#_insert_key('request', 'iPGJzPg==0')
+inoremap <silent> <Plug>CocRefresh =coc#_complete()
 imap <F9> :InsPrevHita
 imap <F8> :InsNextHita
 imap <F5> :PreviewClassa
 imap <S-Tab> <Plug>SuperTabBackward
 inoremap <silent> <C-Tab> =UltiSnips#ListSnippets()
-inoremap <silent> <Plug>CocRefresh =coc#_complete()
 snoremap <silent>  "_c
 xnoremap <silent> 	 :call UltiSnips#SaveLastVisualSelection()gvs
 snoremap <silent> 	 :call UltiSnips#ExpandSnippet()
@@ -42,8 +42,11 @@ nmap \cfn :CodeForcesNextStandings
 nmap \cfp :CodeForcesPrevStandings
 nmap \cfS :CodeForcesSubmission
 nmap \cfr :CodeForcesSetRound 
+noremap bnrsrch :r ~/.vim/templates/implementations/binarySearch.cpp
+noremap bcpp :r ~/.vim/templates/basic.cpp
 vmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
+noremap sv :w
 noremap splr :botright vert split
 noremap ter :botright vert terminal
 vnoremap <silent> <Plug>(coc-snippets-select) :call coc#rpc#notify('doKeymap', ['snippets-select'])
@@ -174,33 +177,6 @@ nnoremap <silent> <Plug>(coc-explorer-key-n-[tab]) :call coc#rpc#request('doKe
 nnoremap <silent> <Plug>(coc-explorer-key-n-*) :call coc#rpc#request('doKeymap', ['explorer-key-n-*'])
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())
-nnoremap <silent> <Plug>GitGutterPreviewHunk :call gitgutter#utility#warn('please change your map <Plug>GitGutterPreviewHunk to <Plug>(GitGutterPreviewHunk)')
-nnoremap <silent> <Plug>(GitGutterPreviewHunk) :GitGutterPreviewHunk
-nnoremap <silent> <Plug>GitGutterUndoHunk :call gitgutter#utility#warn('please change your map <Plug>GitGutterUndoHunk to <Plug>(GitGutterUndoHunk)')
-nnoremap <silent> <Plug>(GitGutterUndoHunk) :GitGutterUndoHunk
-nnoremap <silent> <Plug>GitGutterStageHunk :call gitgutter#utility#warn('please change your map <Plug>GitGutterStageHunk to <Plug>(GitGutterStageHunk)')
-nnoremap <silent> <Plug>(GitGutterStageHunk) :GitGutterStageHunk
-xnoremap <silent> <Plug>GitGutterStageHunk :call gitgutter#utility#warn('please change your map <Plug>GitGutterStageHunk to <Plug>(GitGutterStageHunk)')
-xnoremap <silent> <Plug>(GitGutterStageHunk) :GitGutterStageHunk
-nnoremap <silent> <expr> <Plug>GitGutterPrevHunk &diff ? '[c' : ":\call gitgutter#utility#warn('please change your map \<Plug>GitGutterPrevHunk to \<Plug>(GitGutterPrevHunk)')\"
-nnoremap <silent> <expr> <Plug>(GitGutterPrevHunk) &diff ? '[c' : ":\execute v:count1 . 'GitGutterPrevHunk'\"
-nnoremap <silent> <expr> <Plug>GitGutterNextHunk &diff ? ']c' : ":\call gitgutter#utility#warn('please change your map \<Plug>GitGutterNextHunk to \<Plug>(GitGutterNextHunk)')\"
-nnoremap <silent> <expr> <Plug>(GitGutterNextHunk) &diff ? ']c' : ":\execute v:count1 . 'GitGutterNextHunk'\"
-xnoremap <silent> <Plug>(GitGutterTextObjectOuterVisual) :call gitgutter#hunk#text_object(0)
-xnoremap <silent> <Plug>(GitGutterTextObjectInnerVisual) :call gitgutter#hunk#text_object(1)
-onoremap <silent> <Plug>(GitGutterTextObjectOuterPending) :call gitgutter#hunk#text_object(0)
-onoremap <silent> <Plug>(GitGutterTextObjectInnerPending) :call gitgutter#hunk#text_object(1)
-map <C-P> <Plug>(ctrlp)
-nnoremap <silent> <Plug>(ctrlp) :CtrlP
-noremap <S-F6> :w:CodeForcesUserSubmissions
-noremap <S-F5> :w:CodeForcesSubmit
-snoremap <C-R> "_c
-snoremap <silent> <C-H> "_c
-snoremap <silent> <Del> "_c
-snoremap <silent> <BS> "_c
-snoremap <silent> <C-Tab> :call UltiSnips#ListSnippets()
-map <S-F8> :NextInBlock
-map <S-F9> :PrevInBlock
 onoremap <silent> <Plug>(coc-classobj-a) :call coc#rpc#request('selectSymbolRange', [v:false, '', ['Interface', 'Struct', 'Class']])
 onoremap <silent> <Plug>(coc-classobj-i) :call coc#rpc#request('selectSymbolRange', [v:true, '', ['Interface', 'Struct', 'Class']])
 vnoremap <silent> <Plug>(coc-classobj-a) :call coc#rpc#request('selectSymbolRange', [v:false, visualmode(), ['Interface', 'Struct', 'Class']])
@@ -239,6 +215,33 @@ nnoremap <Plug>(coc-codelens-action) :call       CocActionAsync('codeLensActio
 nnoremap <Plug>(coc-range-select) :call       CocActionAsync('rangeSelect',     '', v:true)
 vnoremap <silent> <Plug>(coc-range-select-backward) :call       CocActionAsync('rangeSelect',     visualmode(), v:false)
 vnoremap <silent> <Plug>(coc-range-select) :call       CocActionAsync('rangeSelect',     visualmode(), v:true)
+nnoremap <silent> <Plug>GitGutterPreviewHunk :call gitgutter#utility#warn('please change your map <Plug>GitGutterPreviewHunk to <Plug>(GitGutterPreviewHunk)')
+nnoremap <silent> <Plug>(GitGutterPreviewHunk) :GitGutterPreviewHunk
+nnoremap <silent> <Plug>GitGutterUndoHunk :call gitgutter#utility#warn('please change your map <Plug>GitGutterUndoHunk to <Plug>(GitGutterUndoHunk)')
+nnoremap <silent> <Plug>(GitGutterUndoHunk) :GitGutterUndoHunk
+nnoremap <silent> <Plug>GitGutterStageHunk :call gitgutter#utility#warn('please change your map <Plug>GitGutterStageHunk to <Plug>(GitGutterStageHunk)')
+nnoremap <silent> <Plug>(GitGutterStageHunk) :GitGutterStageHunk
+xnoremap <silent> <Plug>GitGutterStageHunk :call gitgutter#utility#warn('please change your map <Plug>GitGutterStageHunk to <Plug>(GitGutterStageHunk)')
+xnoremap <silent> <Plug>(GitGutterStageHunk) :GitGutterStageHunk
+nnoremap <silent> <expr> <Plug>GitGutterPrevHunk &diff ? '[c' : ":\call gitgutter#utility#warn('please change your map \<Plug>GitGutterPrevHunk to \<Plug>(GitGutterPrevHunk)')\"
+nnoremap <silent> <expr> <Plug>(GitGutterPrevHunk) &diff ? '[c' : ":\execute v:count1 . 'GitGutterPrevHunk'\"
+nnoremap <silent> <expr> <Plug>GitGutterNextHunk &diff ? ']c' : ":\call gitgutter#utility#warn('please change your map \<Plug>GitGutterNextHunk to \<Plug>(GitGutterNextHunk)')\"
+nnoremap <silent> <expr> <Plug>(GitGutterNextHunk) &diff ? ']c' : ":\execute v:count1 . 'GitGutterNextHunk'\"
+xnoremap <silent> <Plug>(GitGutterTextObjectOuterVisual) :call gitgutter#hunk#text_object(0)
+xnoremap <silent> <Plug>(GitGutterTextObjectInnerVisual) :call gitgutter#hunk#text_object(1)
+onoremap <silent> <Plug>(GitGutterTextObjectOuterPending) :call gitgutter#hunk#text_object(0)
+onoremap <silent> <Plug>(GitGutterTextObjectInnerPending) :call gitgutter#hunk#text_object(1)
+map <C-P> <Plug>(ctrlp)
+nnoremap <silent> <Plug>(ctrlp) :CtrlP
+noremap <S-F6> :w:CodeForcesUserSubmissions
+noremap <S-F5> :w:CodeForcesSubmit
+snoremap <C-R> "_c
+snoremap <silent> <C-H> "_c
+snoremap <silent> <Del> "_c
+snoremap <silent> <BS> "_c
+snoremap <silent> <C-Tab> :call UltiSnips#ListSnippets()
+map <S-F8> :NextInBlock
+map <S-F9> :PrevInBlock
 map <C-W>m _|
 map <C-W>  _|
 map <C-N> :NERDTreeToggle
@@ -272,26 +275,25 @@ set laststatus=2
 set nomodeline
 set printoptions=paper:a4
 set ruler
-set runtimepath=~/.config/coc/extensions/node_modules/coc-fzf-preview,~/.vim,~/.vim/plugged/coc.nvim,~/.vim/plugged/onehalf/vim,~/.vim/plugged/nerdtree,~/.vim/plugged/syntastic,~/.vim/plugged/indentLine,~/.vim/plugged/nerdtree-git-plugin,~/.vim/plugged/vim-nerdtree-syntax-highlight,~/.vim/plugged/vim-airline,~/.vim/plugged/supertab,~/.vim/plugged/rainbow_parentheses.vim,~/.vim/plugged/cppcomplete,~/.vim/plugged/ultisnips,~/.vim/plugged/vim-devicons,~/.vim/plugged/codeforces.vim,~/.vim/plugged/vim-color-forest-night,~/.vim/plugged/ayu-vim,~/.vim/plugged/vim-nerdtree-tabs,~/.vim/plugged/ctrlp.vim,~/.vim/plugged/vim-minimap,~/.vim/plugged/vim-gitgutter,~/.vim/plugged/vim-airline-themes,/var/lib/vim/addons,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/vim81,/usr/share/vim/vimfiles/after,/etc/vim/after,/var/lib/vim/addons/after,~/.vim/plugged/indentLine/after,~/.vim/plugged/nerdtree-git-plugin/after,~/.vim/plugged/vim-nerdtree-syntax-highlight/after,~/.vim/plugged/ultisnips/after,~/.vim/after,~/.config/coc/extensions/node_modules/coc-explorer
+set runtimepath=~/.config/coc/extensions/node_modules/coc-fzf-preview,~/.vim,~/.vim/plugged/onehalf/vim,~/.vim/plugged/nerdtree,~/.vim/plugged/syntastic,~/.vim/plugged/indentLine,~/.vim/plugged/nerdtree-git-plugin,~/.vim/plugged/vim-nerdtree-syntax-highlight,~/.vim/plugged/vim-wakatime,~/.vim/plugged/vim-airline,~/.vim/plugged/supertab,~/.vim/plugged/rainbow_parentheses.vim,~/.vim/plugged/cppcomplete,~/.vim/plugged/ultisnips,~/.vim/plugged/vim-devicons,~/.vim/plugged/codeforces.vim,~/.vim/plugged/vim-color-forest-night,~/.vim/plugged/ayu-vim,~/.vim/plugged/vim-nerdtree-tabs,~/.vim/plugged/ctrlp.vim,~/.vim/plugged/vim-minimap,~/.vim/plugged/vim-gitgutter,~/.vim/plugged/vim-airline-themes,~/.vim/plugged/coc.nvim,/var/lib/vim/addons,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/vim81,/usr/share/vim/vimfiles/after,/etc/vim/after,/var/lib/vim/addons/after,~/.vim/plugged/indentLine/after,~/.vim/plugged/nerdtree-git-plugin/after,~/.vim/plugged/vim-nerdtree-syntax-highlight/after,~/.vim/plugged/ultisnips/after,~/.vim/after,~/.config/coc/extensions/node_modules/coc-explorer
 set showtabline=2
 set smartcase
 set smartindent
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set tabline=%!airline#extensions#tabline#get()
-set window=68
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/CN-DSA/PointersAndMemoryAllocation
+cd ~/
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
 argglobal
 %argdel
-$argadd .
-edit dynamicAllocation/1-AdressTypecasting.cpp
+$argadd bnrysrch.cpp
+edit bnrysrch.cpp
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -441,14 +443,14 @@ set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 7 - ((6 * winheight(0) + 33) / 66)
+let s:l = 24 - ((20 * winheight(0) + 10) / 21)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-7
-normal! 012|
+24
+normal! 0
 tabnext 1
-badd +0 dynamicAllocation/1-AdressTypecasting.cpp
+badd +0 bnrysrch.cpp
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
