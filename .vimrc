@@ -1,24 +1,65 @@
 set relativenumber
+set encoding=utf-8
 set number
 set cursorline
+set laststatus=2
+set ruler
+set smartindent
+set incsearch "search as chars are entered
+set hlsearch "highligh matching searches
+
+" Searching:
+set ignorecase " Ignore case
+set smartcase  " Don't ignore case if uppercase letter present
+
+
+"BetterLineWrapping:
+set nowrap
+set linebreak
+set textwidth=0
+set wrapmargin=0
 set nohlsearch "turn off highligh search after pressing enter
-"key bindings for resizing splits
+
+"""""""""""""""""""""""""""""""""""""
+"KeyBindingsForResizingSplits:
+"""""""""""""""""""""""""""""""""""""
 nnoremap <C-Up> :resize +2<CR> 
 nnoremap <C-Down> :resize -2<CR>
 nnoremap <C-Left> :vertical resize +2<CR>
 nnoremap <C-Right> :vertical resize -2<CR>
-"Remap ESC to ii
+
+""""""""""""""""""""""""""""""""""""""
+"KeyMaps:
+""""""""""""""""""""""""""""""""""""""
 :imap ii <Esc>
 noremap ter :botright vert terminal<CR>
 noremap splr :botright vert split<CR>
+noremap sv :w<CR>
+
+"""""""""""""""""""""""""""""""""""""""
+"CPP Snippets:
+"""""""""""""""""""""""""""""""""""""""
 noremap bcpp :r ~/.vim/templates/basic.cpp<CR>
+noremap runc :!g++  %  % ; ./a.out<CR>
+
+"""""""""""""""""""""""""""""""""""""""
+"CompetitveSnippets:
+"""""""""""""""""""""""""""""""""""""""
 noremap bnrsrch :r ~/.vim/templates/implementations/binarySearch.cpp<CR>
 
-noremap sv :w<CR>
+
+"ColorTheme:
 colorscheme gruvbox
 set background=dark
 
-"start of vim-plug manager
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"VimPluginsUsingPlug:
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 call plug#begin()
 	Plug 'sonph/onehalf', { 'rtp': 'vim' }
 	Plug 'scrooloose/nerdtree'
@@ -52,20 +93,28 @@ autocmd VImEnter *
 	\ if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 	\|   PlugInstall --sync | q
 	\|endif
-
-set encoding=utf-8
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:autoclose_on=0
-" air-line Customizations
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"AirlineConfig:
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'base16_gruvbox_dark_hard'
-
 let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-" unicode symbols
+" Unicode Symbols:
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
@@ -79,7 +128,7 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
-" airline symbols
+" Airline Symbols:
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
@@ -87,28 +136,23 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 highlight Comment cterm=italic gui=italic
 
-set laststatus=2
-set ruler
-set smartindent
-set incsearch "search as chars are entered
-set hlsearch "highligh matching searches
 
-" indent for special files
+"IndentForspecialFiles:
 autocmd FileType c,cpp setlocal expandtab shiftwidth=2 softtabstop=2 cindent
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 cindent
 
-"Compiling CPP code
-autocmd FileType cpp nnoremap     <leader>rm    :!g++ -g --std=c++11 % -o %:r<CR>
-" autocmd FileType cpp nnoremap   <leader>rm    :set makeprg=g++<CR>:make % -o %:r<CR>
-autocmd FileType cpp nnoremap     <leader>rr    :!./%:r<CR>
-autocmd FileType cpp nnoremap     <leader>rt    :!for f in %:r.*.test; do echo "TEST: $f"; ./%:r < $f; done<CR>
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"=> COC
+
+"COC:
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:coc_global_extensions = [
@@ -120,15 +164,19 @@ let g:coc_global_extensions = [
   \ 'coc-vimlsp',
   \ 'coc-pairs'
   \ ]
-
 autocmd FileType cpp let b:coc_pairs_disabled = ["<"]
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" Highlight currently open buffer in NERDTree
+"NERDTreeToggle:
 map <C-n> :NERDTreeToggle<CR>
 
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"=> Trailing spaces
+
+"TrailingSpaces:
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! CleanExtraSpaces() "Function to clean unwanted spaces
@@ -141,22 +189,4 @@ endfun
 
 
 
-
-" Searching
-set ignorecase " Ignore case
-set smartcase  " Don't ignore case if uppercase letter present
-set incsearch  " Show next match while searching
-
-
-" Maximize current split horizontally and vertically
-map <C-W><Space> <C-W>_<C-W>\|
-map <C-W>m <C-W>_<C-W>\|
-
-
-
-"Better line wrapping
-set nowrap
-set linebreak
-set textwidth=0
-set wrapmargin=0
 
