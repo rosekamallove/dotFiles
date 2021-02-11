@@ -40,7 +40,7 @@ noremap sv :w<CR>
 "CPP Snippets:
 """""""""""""""""""""""""""""""""""""""
 noremap bcpp :r ~/.vim/templates/basic.cpp<CR>
-noremap runc :!g++  %  % ; ./a.out<CR>
+noremap runc :!g++  %  ; ./a.out<CR>
 
 """""""""""""""""""""""""""""""""""""""
 "CompetitveSnippets:
