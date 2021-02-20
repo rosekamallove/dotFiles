@@ -40,6 +40,7 @@ noremap sv :w<CR>
 "CPP Snippets:
 """""""""""""""""""""""""""""""""""""""
 noremap bcpp :r ~/.vim/templates/basic.cpp<CR>
+noremap cpp :r ~/.vim/templates/code.cpp<CR>
 noremap runc :!g++  %  ; ./a.out<CR>
 
 """""""""""""""""""""""""""""""""""""""
@@ -82,7 +83,6 @@ call plug#begin()
         Plug 'severin-lemaignan/vim-minimap'
         Plug 'airblade/vim-gitgutter'
         Plug 'vim-airline/vim-airline-themes'
-	Plug 'neoclide/coc.nvim', {'branch':'release'}
   
 "    Plug 'itchyny/lightline.vim'
 call plug#end()
