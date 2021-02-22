@@ -39,8 +39,9 @@ noremap sv :w<CR>
 """""""""""""""""""""""""""""""""""""""
 "CPP Snippets:
 """""""""""""""""""""""""""""""""""""""
-noremap bcpp :r ~/.vim/templates/basic.cpp<CR>
-noremap cpp :r ~/.vim/templates/code.cpp<CR>
+noremap cpp :r ~/.vim/templates/basic.cpp<CR>
+noremap bcpp :r ~/.vim/templates/code.cpp<CR>
+noremap ccpp :r ~/.vim/templates/cp.cpp<CR>
 noremap runc :!g++  %  ; ./a.out<CR>
 
 """""""""""""""""""""""""""""""""""""""
@@ -62,25 +63,22 @@ set background=dark
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin()
-	Plug 'sonph/onehalf', { 'rtp': 'vim' }
+        Plug 'sonph/onehalf', {'rtp': 'vim/'}
 	Plug 'scrooloose/nerdtree'
-        Plug 'vim-syntastic/syntastic'
+	Plug 'dense-analysis/ale'
         Plug 'Yggdroot/indentLine'
         Plug 'Xuyuanp/nerdtree-git-plugin'
         Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 	Plug 'wakatime/vim-wakatime'
+	Plug 'tomtom/checksyntax_vim'
 	Plug 'bling/vim-airline'
 	Plug 'ervandew/supertab'
 	Plug 'kien/rainbow_parentheses.vim'
-	Plug 'vim-scripts/cppcomplete'
 	Plug 'SirVer/ultisnips'
 	Plug 'ryanoasis/vim-devicons'
-	Plug 'Igorjan94/codeforces.vim'
 	Plug 'sainnhe/vim-color-forest-night'
-	Plug 'ayu-theme/ayu-vim'
 	Plug 'jistr/vim-nerdtree-tabs'
         Plug 'ctrlpvim/ctrlp.vim'
-        Plug 'severin-lemaignan/vim-minimap'
         Plug 'airblade/vim-gitgutter'
         Plug 'vim-airline/vim-airline-themes'
   

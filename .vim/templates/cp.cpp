@@ -3,10 +3,17 @@ using namespace std;
 
 const int M = 1e9+7;
 const int N = 1e5+12;
-long long hsh[N];
-long long pr[N];
-
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int,int> pi;
+#define F first
+#define S second
+#define pb push_back
+#define mp make_pair
+#define int ll
+#define fn(i,a,b) for (int i=a; i<=a; i++)
 void fileIO();
+long long fact[N];
 
 void solve()
 {
@@ -19,12 +26,15 @@ void solveT()
   {
   }
 }
-int main()
+
+int32_t main()
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
+
   //solve();
   //solveT();
+  return 0;
 }
 
 void fileIO()
