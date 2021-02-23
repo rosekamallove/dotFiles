@@ -1,3 +1,4 @@
+au FocusGained,BufEnter * :checktime
 set relativenumber
 set encoding=utf-8
 set number
@@ -35,6 +36,7 @@ nnoremap <C-Right> :vertical resize -2<CR>
 :imap ii <Esc>
 noremap ter :botright vert terminal<CR>
 noremap splr :botright vert split<CR>
+noremap spl :split<CR>
 noremap sv :w<CR>
 
 """""""""""""""""""""""""""""""""""""""
@@ -44,6 +46,7 @@ noremap cpp :r ~/.vim/templates/basic.cpp<CR>
 noremap bcpp :r ~/.vim/templates/code.cpp<CR>
 noremap ccpp :r ~/.vim/templates/cp.cpp<CR>
 noremap runc :!g++  %  ; ./a.out<CR>
+noremap rnc :silent exec "!g++  %  ; ./a.out" <CR>
 
 """""""""""""""""""""""""""""""""""""""
 "CompetitveSnippets:
@@ -52,8 +55,8 @@ noremap bnrsrch :r ~/.vim/templates/implementations/binarySearch.cpp<CR>
 
 
 "ColorTheme:
-colorscheme gruvbox
 set background=dark
+colorscheme gruvbox
 
 
 
@@ -77,7 +80,9 @@ call plug#begin()
 	Plug 'kien/rainbow_parentheses.vim'
 	Plug 'SirVer/ultisnips'
 	Plug 'ryanoasis/vim-devicons'
+	Plug 'dracula/vim', { 'as': 'dracula' }
 	Plug 'sainnhe/vim-color-forest-night'
+	Plug 'djoshea/vim-autoread'
 	Plug 'jistr/vim-nerdtree-tabs'
         Plug 'ctrlpvim/ctrlp.vim'
         Plug 'airblade/vim-gitgutter'
