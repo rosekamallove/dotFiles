@@ -7,6 +7,7 @@ set ruler
 set smartindent
 set incsearch "search as chars are entered
 set hlsearch "highligh matching searches
+set path=.,,**
 
 " Searching:
 set ignorecase " Ignore case
