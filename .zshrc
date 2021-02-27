@@ -1,8 +1,12 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+export EDITOR="vim"
 # Path to your oh-my-zsh installation.
 export ZSH="/home/rosek/.oh-my-zsh"
+
+alias ll="ls -Alh"
+alias ls="lsd --group-dirs first"
 
 
 # Set name of the theme to load --- if set to "random", it will
