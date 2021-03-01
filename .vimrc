@@ -38,6 +38,7 @@ noremap ter :botright vert terminal<CR>
 noremap splr :botright vert split<CR>
 noremap spl :split<CR>
 noremap sv :w<CR>
+noremap dtls :ALEDetail<CR>
 
 """""""""""""""""""""""""""""""""""""""
 "CPP Snippets:
@@ -68,6 +69,7 @@ colorscheme solarized
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin()
+	Plug 'octol/vim-cpp-enhanced-highlight'
         Plug 'sonph/onehalf', {'rtp': 'vim/'}
 	Plug 'scrooloose/nerdtree'
 	Plug 'dense-analysis/ale'
