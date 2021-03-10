@@ -38,7 +38,6 @@ noremap ter :botright vert terminal<CR>
 noremap splr :botright vert split<CR>
 noremap spl :split<CR>
 noremap sv :w<CR>
-noremap dtls :ALEDetail<CR>
 
 """""""""""""""""""""""""""""""""""""""
 "CPP Snippets:
