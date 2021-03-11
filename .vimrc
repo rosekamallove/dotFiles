@@ -33,7 +33,7 @@ nnoremap <C-Right> :vertical resize -2<CR>
 """"""""""""""""""""""""""""""""""""""
 "KeyMaps:
 """"""""""""""""""""""""""""""""""""""
-:imap ii <Esc>
+:imap kj <Esc>
 noremap ter :botright vert terminal<CR>
 noremap splr :botright vert split<CR>
 noremap spl :split<CR>
