@@ -56,7 +56,6 @@ noremap bnrsrch :r ~/.vim/templates/implementations/binarySearch.cpp<CR>
 
 "ColorTheme:
 set background=dark
-set t_Co=16
 colorscheme solarized
 
 
@@ -76,7 +75,6 @@ call plug#begin()
         Plug 'Xuyuanp/nerdtree-git-plugin'
         Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 	Plug 'wakatime/vim-wakatime'
-	Plug 'tomtom/checksyntax_vim'
 	Plug 'bling/vim-airline'
 	Plug 'ervandew/supertab'
 	Plug 'kien/rainbow_parentheses.vim'
@@ -113,6 +111,7 @@ let g:autoclose_on=0
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'solarized'
+"let g:airline_theme = 'base16_gruvbox_dark_hard'
 let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
