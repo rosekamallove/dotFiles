@@ -147,7 +147,7 @@ highlight Comment cterm=italic gui=italic
 
 
 "IndentForspecialFiles:
-autocmd FileType c,cpp setlocal expandtab shiftwidth=2 softtabstop=2 cindent
+autocmd FileType c,cpp setlocal expandtab shiftwidth=4 softtabstop=4 cindent
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 cindent
 
 
