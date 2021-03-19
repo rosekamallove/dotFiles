@@ -9,6 +9,7 @@ set smartindent
 set incsearch "search as chars are entered
 set hlsearch "highligh matching searches
 set path=.,,**
+inoremap { {<CR>}<Esc>ko
 
 " Searching:
 set ignorecase " Ignore case
@@ -56,7 +57,7 @@ noremap bnrsrch :r ~/.vim/templates/implementations/binarySearch.cpp<CR>
 
 "ColorTheme:
 set background=dark
-colorscheme solarized
+colorscheme gruvbox
 
 
 
@@ -110,8 +111,8 @@ let g:autoclose_on=0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'solarized'
-"let g:airline_theme = 'base16_gruvbox_dark_hard'
+"let g:airline_theme = 'solarized'
+let g:airline_theme = 'base16_gruvbox_dark_hard'
 let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
@@ -147,7 +148,7 @@ highlight Comment cterm=italic gui=italic
 
 
 "IndentForspecialFiles:
-autocmd FileType c,cpp setlocal expandtab shiftwidth=4 softtabstop=4 cindent
+autocmd FileType c,cpp setlocal expandtab shiftwidth=2 softtabstop=2 cindent
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 cindent
 
 
@@ -190,7 +191,4 @@ function! CleanExtraSpaces() "Function to clean unwanted spaces
     call setpos('.', save_cursor)
     call setreg('/', old_query)
 endfun
-
-
-
 
