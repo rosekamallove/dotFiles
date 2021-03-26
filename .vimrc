@@ -57,7 +57,7 @@ noremap bnrsrch :r ~/.vim/templates/implementations/binarySearch.cpp<CR>
 
 "ColorTheme:
 set background=dark
-colorscheme gruvbox
+colorscheme solarized
 
 
 
@@ -69,7 +69,6 @@ colorscheme gruvbox
 
 call plug#begin()
 	Plug 'octol/vim-cpp-enhanced-highlight'
-        Plug 'sonph/onehalf', {'rtp': 'vim/'}
 	Plug 'scrooloose/nerdtree'
 	Plug 'dense-analysis/ale'
         Plug 'Yggdroot/indentLine'
@@ -80,12 +79,11 @@ call plug#begin()
 	Plug 'ervandew/supertab'
 	Plug 'kien/rainbow_parentheses.vim'
 	Plug 'ryanoasis/vim-devicons'
-	Plug 'dracula/vim', { 'as': 'dracula' }
-	Plug 'sainnhe/vim-color-forest-night'
 	Plug 'djoshea/vim-autoread'
 	Plug 'jistr/vim-nerdtree-tabs'
         Plug 'ctrlpvim/ctrlp.vim'
         Plug 'airblade/vim-gitgutter'
+	Plug 'neoclide/coc.nvim'
         Plug 'vim-airline/vim-airline-themes'
   
 "    Plug 'itchyny/lightline.vim'
@@ -111,8 +109,8 @@ let g:autoclose_on=0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:airline_powerline_fonts = 1
-"let g:airline_theme = 'solarized'
-let g:airline_theme = 'base16_gruvbox_dark_hard'
+let g:airline_theme = 'solarized'
+"let g:airline_theme = 'base16_gruvbox_dark_hard'
 let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
@@ -148,7 +146,7 @@ highlight Comment cterm=italic gui=italic
 
 
 "IndentForspecialFiles:
-autocmd FileType c,cpp setlocal expandtab shiftwidth=2 softtabstop=2 cindent
+autocmd FileType c,cpp setlocal expandtab shiftwidth=4 softtabstop=4 cindent
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 cindent
 
 
