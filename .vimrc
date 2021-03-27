@@ -57,7 +57,7 @@ noremap bnrsrch :r ~/.vim/templates/implementations/binarySearch.cpp<CR>
 
 "ColorTheme:
 set background=dark
-colorscheme solarized
+colorscheme gruvbox
 
 
 
@@ -69,6 +69,8 @@ colorscheme solarized
 
 call plug#begin()
 	Plug 'octol/vim-cpp-enhanced-highlight'
+	Plug 'junegunn/vim-easy-align'
+	Plug 'Igorjan94/codeforces.vim'
 	Plug 'scrooloose/nerdtree'
 	Plug 'dense-analysis/ale'
         Plug 'Yggdroot/indentLine'
@@ -109,8 +111,8 @@ let g:autoclose_on=0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'solarized'
-"let g:airline_theme = 'base16_gruvbox_dark_hard'
+"let g:airline_theme = 'solarized'
+let g:airline_theme = 'base16_gruvbox_dark_hard'
 let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
@@ -190,3 +192,40 @@ function! CleanExtraSpaces() "Function to clean unwanted spaces
     call setreg('/', old_query)
 endfun
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"CodeForcesParses:
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:CodeForcesCount = 40
+let g:CodeForcesContestId = 710
+let g:CodeForcesUpdateInterval = 1 
+let g:CodeForcesCountOfSubmits = 10
+let g:CodeForcesShowUnofficial = 1 
+
+
+let g:CodeForcesUsername = 'rosekamallove'
+let g:CodeForcesPassword = '0p9lhegi2q'
+
+"CodeForcesRemaps:
+nmap <leader>cfr <ESC>:CodeForcesSet_R_ound
+nmap <leader>cfS <ESC>:CodeForces_S_ubmission<CR>
+nmap <leader>cfp <ESC>:CodeForces_P_revStandings<CR>
+nmap <leader>cfn <ESC>:CodeForces_N_extStandings<CR>
+nmap <leader>cfs <ESC>:CodeForces_S_tandings<CR>
+nmap <leader>cff <ESC>:CodeForces_F_riendsSet<CR>
+nmap <leader>cfu <ESC>:CodeForces_U_nofficial<CR>
+nmap <leader>cfl <ESC>:CodeForces_L_oadTask
+nmap <leader>cfP <ESC>:CodeForces_P_ageStandings
+nmap <leader>cfR <ESC>:CodeForces_R_oomStandings<CR>
+nmap <leader>cfA <ESC>:CodeForcesP_a_rseContest<CR>
+nmap <leader>cft <ESC>:CodeForces_T_est<CR>
+nmap <leader>cfcl <ESC>:CodeForces_C_ontest_L_ist<CR>
+nmap <leader>cfcn <ESC>:CodeForces_C_ontestList_N_ext<CR>
+nmap <leader>cfcp <ESC>:CodeForces_C_ontestList_P_rev<CR>
+nmap <leader>cfF <ESC>:CodeForcesLoad_F_riends<CR>
+
+"ForSubmission:
+noremap <S-F5> <ESC>:w<CR><ESC>:CodeForcesSubmit<CR>
+noremap <S-F6> <ESC>:w<CR><ESC>:CodeForcesUserSubmissions<CR>
