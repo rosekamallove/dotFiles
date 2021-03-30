@@ -68,21 +68,19 @@ colorscheme gruvbox
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin()
-	Plug 'octol/vim-cpp-enhanced-highlight'
+	Plug 'sheerun/vim-polyglot'
 	Plug 'junegunn/vim-easy-align'
 	Plug 'Igorjan94/codeforces.vim'
 	Plug 'scrooloose/nerdtree'
 	Plug 'dense-analysis/ale'
         Plug 'Yggdroot/indentLine'
         Plug 'Xuyuanp/nerdtree-git-plugin'
-        Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 	Plug 'wakatime/vim-wakatime'
 	Plug 'bling/vim-airline'
 	Plug 'ervandew/supertab'
 	Plug 'kien/rainbow_parentheses.vim'
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'djoshea/vim-autoread'
-	Plug 'jistr/vim-nerdtree-tabs'
         Plug 'ctrlpvim/ctrlp.vim'
         Plug 'airblade/vim-gitgutter'
 	Plug 'neoclide/coc.nvim'
@@ -229,3 +227,19 @@ nmap <leader>cfF <ESC>:CodeForcesLoad_F_riends<CR>
 "ForSubmission:
 noremap <S-F5> <ESC>:w<CR><ESC>:CodeForcesSubmit<CR>
 noremap <S-F6> <ESC>:w<CR><ESC>:CodeForcesUserSubmissions<CR>
+
+
+
+au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.cs,*.rkt,*.h,*.html
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=120 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+
+set encoding=utf-8
+
+set wildmenu
+nnoremap // :noh<return>
