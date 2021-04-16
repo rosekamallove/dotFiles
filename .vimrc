@@ -11,6 +11,8 @@ set hlsearch "highligh matching searches
 set path=.,,**
 inoremap { {<CR>}<Esc>ko
 
+let g:solarized_termcolors=256
+
 " Searching:
 set ignorecase " Ignore case
 set smartcase  " Don't ignore case if uppercase letter present
@@ -68,23 +70,23 @@ colorscheme gruvbox
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin()
-	Plug 'sheerun/vim-polyglot'
-	Plug 'junegunn/vim-easy-align'
 	Plug 'Igorjan94/codeforces.vim'
+	Plug 'codota/tabnine-vim'
+	Plug 'sheerun/vim-polyglot'
 	Plug 'scrooloose/nerdtree'
 	Plug 'dense-analysis/ale'
-        Plug 'Yggdroot/indentLine'
-        Plug 'Xuyuanp/nerdtree-git-plugin'
+    	Plug 'Yggdroot/indentLine'
+    	Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'wakatime/vim-wakatime'
 	Plug 'bling/vim-airline'
 	Plug 'ervandew/supertab'
 	Plug 'kien/rainbow_parentheses.vim'
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'djoshea/vim-autoread'
-        Plug 'ctrlpvim/ctrlp.vim'
-        Plug 'airblade/vim-gitgutter'
+    	Plug 'ctrlpvim/ctrlp.vim'
+    	Plug 'airblade/vim-gitgutter'
 	Plug 'neoclide/coc.nvim'
-        Plug 'vim-airline/vim-airline-themes'
+    	Plug 'vim-airline/vim-airline-themes'
   
 "    Plug 'itchyny/lightline.vim'
 call plug#end()
@@ -143,13 +145,6 @@ let g:airline_symbols.linenr = ''
 
 
 highlight Comment cterm=italic gui=italic
-
-
-"IndentForspecialFiles:
-autocmd FileType c,cpp setlocal expandtab shiftwidth=4 softtabstop=4 cindent
-autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 cindent
-
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
