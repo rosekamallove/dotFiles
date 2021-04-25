@@ -59,7 +59,7 @@ noremap bnrsrch :r ~/.vim/templates/implementations/binarySearch.cpp<CR>
 
 "ColorTheme:
 set background=dark
-colorscheme gruvbox
+colorscheme solarized
 
 
 
@@ -75,18 +75,20 @@ call plug#begin()
 	Plug 'sheerun/vim-polyglot'
 	Plug 'scrooloose/nerdtree'
 	Plug 'dense-analysis/ale'
-    	Plug 'Yggdroot/indentLine'
-    	Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'Yggdroot/indentLine'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'wakatime/vim-wakatime'
 	Plug 'bling/vim-airline'
 	Plug 'ervandew/supertab'
 	Plug 'kien/rainbow_parentheses.vim'
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'djoshea/vim-autoread'
-    	Plug 'ctrlpvim/ctrlp.vim'
-    	Plug 'airblade/vim-gitgutter'
-	Plug 'neoclide/coc.nvim'
-    	Plug 'vim-airline/vim-airline-themes'
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'airblade/vim-gitgutter'
+	"Plug 'neoclide/coc.nvim'
+	Plug 'valloric/youcompleteme'
+  Plug 'vim-airline/vim-airline-themes'
+	Plug 'joshdick/onedark.vim'
   
 "    Plug 'itchyny/lightline.vim'
 call plug#end()
@@ -111,8 +113,7 @@ let g:autoclose_on=0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:airline_powerline_fonts = 1
-"let g:airline_theme = 'solarized'
-let g:airline_theme = 'base16_gruvbox_dark_hard'
+let g:airline_theme = 'solarized'
 let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
