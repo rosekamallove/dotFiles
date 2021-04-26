@@ -14,6 +14,9 @@ bool isPrime[N + 1];
 
 int Power(int x, int n);
 void sieve(int N);
+void readArr(int arr[], int n) {rep(i,n) cin>>arr[i];}
+void printArr(int arr[], int n) {rep(i,n) cout<<arr[i]<<' '; cout<<endl;}
+void readVect(vector<int> v);
 
 void solve()
 {
@@ -30,6 +33,12 @@ signed main()
     cin.tie(0);
     cout.tie(0);
     solve();
+}
+
+void readVect(vector<int> v) 
+{
+    int x; cin>>x;
+    v.push_back(x);
 }
 
 int Power(int x, int n, int M)

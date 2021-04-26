@@ -1,0 +1,4 @@
+alsa-utils 
+xmonad xmobar nitrogen compton 
+sudo add-apt-repository ppa:apandada1/brightness-controller
+brightness-controller

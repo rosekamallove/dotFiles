@@ -1,3 +1,4 @@
+source $HOME/.vim/plugConfig/coc.vim
 au FocusGained,BufEnter * :checktime
 set relativenumber
 set encoding=utf-8
@@ -11,7 +12,7 @@ set hlsearch "highligh matching searches
 set path=.,,**
 inoremap { {<CR>}<Esc>ko
 
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 
 " Searching:
 set ignorecase " Ignore case
@@ -59,7 +60,7 @@ noremap bnrsrch :r ~/.vim/templates/implementations/binarySearch.cpp<CR>
 
 "ColorTheme:
 set background=dark
-colorscheme solarized
+colorscheme gruvbox
 
 
 
@@ -71,7 +72,6 @@ colorscheme solarized
 
 call plug#begin()
 	Plug 'Igorjan94/codeforces.vim'
-	Plug 'codota/tabnine-vim'
 	Plug 'sheerun/vim-polyglot'
 	Plug 'scrooloose/nerdtree'
 	Plug 'dense-analysis/ale'
@@ -85,8 +85,9 @@ call plug#begin()
 	Plug 'djoshea/vim-autoread'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'airblade/vim-gitgutter'
-	"Plug 'neoclide/coc.nvim'
-	Plug 'valloric/youcompleteme'
+	Plug 'neoclide/coc.nvim'
+	Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+	Plug 'kevinhwang91/rnvimr', {'do' : 'make sync'}
   Plug 'vim-airline/vim-airline-themes'
 	Plug 'joshdick/onedark.vim'
   
@@ -113,7 +114,7 @@ let g:autoclose_on=0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'base16_gruvbox_dark_hard'
 let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
@@ -146,31 +147,11 @@ let g:airline_symbols.linenr = ''
 
 
 highlight Comment cterm=italic gui=italic
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"COC:
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-tsserver',
-  \ 'coc-eslint',
-  \ 'coc-json',
-  \ 'coc-python',
-  \ 'coc-vimlsp',
-  \ 'coc-pairs'
-  \ ]
-autocmd FileType cpp let b:coc_pairs_disabled = ["<"]
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType cpp let b:coc_pairs_disabled = ["<", "{"]
 
 
 "NERDTreeToggle:
 map <C-n> :NERDTreeToggle<CR>
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -186,44 +167,6 @@ function! CleanExtraSpaces() "Function to clean unwanted spaces
     call setreg('/', old_query)
 endfun
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"CodeForcesParses:
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:CodeForcesCount = 40
-let g:CodeForcesContestId = 710
-let g:CodeForcesUpdateInterval = 1 
-let g:CodeForcesCountOfSubmits = 10
-let g:CodeForcesShowUnofficial = 1 
-
-
-let g:CodeForcesUsername = 'rosekamallove'
-let g:CodeForcesPassword = '0p9lhegi2q'
-
-"CodeForcesRemaps:
-nmap <leader>cfr <ESC>:CodeForcesSet_R_ound
-nmap <leader>cfS <ESC>:CodeForces_S_ubmission<CR>
-nmap <leader>cfp <ESC>:CodeForces_P_revStandings<CR>
-nmap <leader>cfn <ESC>:CodeForces_N_extStandings<CR>
-nmap <leader>cfs <ESC>:CodeForces_S_tandings<CR>
-nmap <leader>cff <ESC>:CodeForces_F_riendsSet<CR>
-nmap <leader>cfu <ESC>:CodeForces_U_nofficial<CR>
-nmap <leader>cfl <ESC>:CodeForces_L_oadTask
-nmap <leader>cfP <ESC>:CodeForces_P_ageStandings
-nmap <leader>cfR <ESC>:CodeForces_R_oomStandings<CR>
-nmap <leader>cfA <ESC>:CodeForcesP_a_rseContest<CR>
-nmap <leader>cft <ESC>:CodeForces_T_est<CR>
-nmap <leader>cfcl <ESC>:CodeForces_C_ontest_L_ist<CR>
-nmap <leader>cfcn <ESC>:CodeForces_C_ontestList_N_ext<CR>
-nmap <leader>cfcp <ESC>:CodeForces_C_ontestList_P_rev<CR>
-nmap <leader>cfF <ESC>:CodeForcesLoad_F_riends<CR>
-
-"ForSubmission:
-noremap <S-F5> <ESC>:w<CR><ESC>:CodeForcesSubmit<CR>
-noremap <S-F6> <ESC>:w<CR><ESC>:CodeForcesUserSubmissions<CR>
-
 
 
 au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.cs,*.rkt,*.h,*.html
@@ -236,6 +179,4 @@ au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.cs,*.rkt,*.h,*.html
     \ set fileformat=unix |
 
 set encoding=utf-8
-
 set wildmenu
-nnoremap // :noh<return>
