@@ -28,10 +28,11 @@ Config { font = "xft:Cascadia Code:pixelsize=11:antialias=true:hinting=true"
                                "--normal","#42f59e","--high","#f54242"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Swap [] 10
-                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+										, Run Com "acpi" [] "battery" 1
+                    , Run Date "%a %b %_d %H:%M" "date" 10
                     ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = "%cpu% | %memory% | }\
-                    \{ <fc=#8ec07c>%date%</fc>"
+                    \{ <fc=#8ec07c>%date%</fc> | <fc=#d3869b>%battery%</fc> "
        }
