@@ -1,11 +1,3 @@
---
--- xmonad example config file.
---
--- A template showing all available configuration hooks,
--- and how to override the defaults in your own xmonad.hs conf file.
---
--- Normally, you'd only override those defaults you care about.
---
 
 import XMonad
 import Data.Monoid
@@ -13,19 +5,13 @@ import System.Exit
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
-
+import XMonad.Layout.AutoMaster
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
--- The preferred terminal program, which is used in a binding below and by
--- certain contrib modules.
-
-
 
 myFont :: String
-myFont = "xft:FiraCode Nerd Font Mono:regular:size=9:antialias=true:hinting=true"
-
-
+myFont = "xft:Cascadia Code:regular:size=9:antialias=true:hinting=true"
 
 myTerminal      = "alacritty"
 
@@ -38,35 +24,21 @@ myClickJustFocuses :: Bool
 myClickJustFocuses = False
 
 -- Width of the window border in pixels.
---
 myBorderWidth   = 1
 
--- modMask lets you specify which modkey you want to use. The default
--- is mod1Mask ("left alt").  You may also consider using mod3Mask
--- ("right alt"), which does not conflict with emacs keybindings. The
--- "windows key" is usually mod4Mask.
---
+-- Do mod4mask for the windows key
 myModMask       = mod1Mask
 
--- The default number of workspaces (virtual screens) and their names.
--- By default we use numeric strings, but any string may be used as a
--- workspace name. The number of workspaces is determined by the length
--- of this list.
---
--- A tagging example:
---
--- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
---
+-- Length of the array is the no of workspaces and the string is the name of each
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
---
 myNormalBorderColor  = "#282c34"
-myFocusedBorderColor = "#9e3f3f"
+myFocusedBorderColor = "#8ec07c"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
---
+
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
@@ -77,6 +49,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p    ), spawn "gmrun")
+
+    -- launch Chrome
+    , ((modm .|. shiftMask, xK_g    ), spawn "google-chrome")
+
+    -- launch Qute Browser
+    , ((modm .|. shiftMask, xK_b    ), spawn "qutebrowser")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -197,7 +175,7 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
      tiled   = Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
-     nmaster = 1
+     nmaster = 2
 
      -- Default proportion of screen occupied by master pane
      ratio   = 1/2

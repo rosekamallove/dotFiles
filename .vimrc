@@ -1,4 +1,3 @@
-source $HOME/.vim/plugConfig/coc.vim
 au FocusGained,BufEnter * :checktime
 set relativenumber
 set encoding=utf-8
@@ -6,33 +5,55 @@ set number
 set cursorline
 set laststatus=2
 set ruler
+set mouse=a
 set smartindent
 set incsearch "search as chars are entered
 set hlsearch "highligh matching searches
 set path=.,,**
+set conceallevel=0
+set smarttab
+set showtabline=2
+set noshowmode
+set nowritebackup
+set nobackup
+set updatetime=300
+set timeoutlen=500
+set clipboard=unnamedplus
 inoremap { {<CR>}<Esc>ko
-
+set t_Co=256
 "let g:solarized_termcolors=256
 
 " Searching:
 set ignorecase " Ignore case
 set smartcase  " Don't ignore case if uppercase letter present
 
-
 "BetterLineWrapping:
 set nowrap
 set linebreak
 set textwidth=0
 set wrapmargin=0
-set nohlsearch "turn off highligh search after pressing enter
+"set nohlsearch "turn off highligh search after pressing enter
 
 """""""""""""""""""""""""""""""""""""
 "KeyBindingsForResizingSplits:
 """""""""""""""""""""""""""""""""""""
-nnoremap <C-Up> :resize +2<CR> 
-nnoremap <C-Down> :resize -2<CR>
-nnoremap <C-Left> :vertical resize +2<CR>
-nnoremap <C-Right> :vertical resize -2<CR>
+" M == alt
+nnoremap <M-j>    :resize -2<CR>
+nnoremap <M-k>    :resize +2<CR>
+nnoremap <M-h>    :vertical resize -2<CR>
+nnoremap <M-l>    :vertical resize +2<CR>
+
+""""""""""""""""""""""""""""""""""""""
+"TabToNextBuffer:
+""""""""""""""""""""""""""""""""""""""
+" TAB in general mode will move to text buffer
+nnoremap <TAB> :bnext<CR>
+" SHIFT-TAB will go back
+nnoremap <S-TAB> :bprevious<CR>
+
+" Better tabbing
+vnoremap < <gv
+vnoremap > >gv
 
 """"""""""""""""""""""""""""""""""""""
 "KeyMaps:
@@ -44,13 +65,21 @@ noremap spl :split<CR>
 noremap sv :w<CR>
 
 """""""""""""""""""""""""""""""""""""""
+" Window Nav:
+"""""""""""""""""""""""""""""""""""""""
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+"""""""""""""""""""""""""""""""""""""""
 "CPP Snippets:
 """""""""""""""""""""""""""""""""""""""
 noremap cpp :r ~/.vim/templates/basic.cpp<CR>
 noremap bcpp :r ~/.vim/templates/code.cpp<CR>
 noremap ccpp :r ~/.vim/templates/cp.cpp<CR>
 noremap runc :!g++  %  ; ./a.out<CR>
-noremap rnc :silent exec "!g++  %  ; ./a.out" <CR>
+noremap runt :!g++  %  ; ./a.out < input.txt <CR>
 
 """""""""""""""""""""""""""""""""""""""
 "CompetitveSnippets:
@@ -72,11 +101,10 @@ colorscheme gruvbox
 
 call plug#begin()
 	Plug 'Igorjan94/codeforces.vim'
+	Plug 'skammer/vim-css-color'
 	Plug 'sheerun/vim-polyglot'
-	Plug 'scrooloose/nerdtree'
 	Plug 'dense-analysis/ale'
   Plug 'Yggdroot/indentLine'
-  Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'wakatime/vim-wakatime'
 	Plug 'bling/vim-airline'
 	Plug 'ervandew/supertab'
@@ -150,8 +178,6 @@ highlight Comment cterm=italic gui=italic
 autocmd FileType cpp let b:coc_pairs_disabled = ["<", "{"]
 
 
-"NERDTreeToggle:
-map <C-n> :NERDTreeToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
