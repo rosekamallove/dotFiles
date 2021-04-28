@@ -6,17 +6,19 @@ bool isPrime[N + 1];
 
 #define int long long
 #define endl "\n"
-#define deb(x) cout << #x << ": " << x << endl;
-#define tdeb(x, y) cout << #x << ": " << x << #y << ": " << y << endl;
-#define rep(i, n) for (int i(0); i < n; i++)
-#define rip(i, n) for (int i(1); i <= n; i++)
-#define rap(i, a, n) for (int i(a); i < n; i++)
+#define deb (x)        cout << #x << ": " << x << endl;
+#define tdeb(x, y)     cout << #x << ": " << x << #y << ": " << y << endl;
+#define rep (i, n)     for (int i(0); i <  n; i++)
+#define rip (i, n)     for (int i(1); i <= n; i++)
+#define rap (i, a, n)  for (int i(a); i <  n; i++)
 
-int Power(int x, int n);
-void sieve(int N);
-void readArr(int arr[], int n) {rep(i,n) cin>>arr[i];}
-void printArr(int arr[], int n) {rep(i,n) cout<<arr[i]<<' '; cout<<endl;}
-void readVect(vector<int> v);
+int  Power   (int x, int n);
+void sieve   (int N);
+void readVect( vector<int> v);
+void readArr ( int a[],       int n  )  { rep(i,n) cin >>  a[i]; }
+void printArr( int a[],        int n )  { rep(i,n) cout<<  a[i]<<' '; cout<<endl; }
+void readArr ( vector<int> a, int n  )  { rep(i,n) cin >>  a[i]; }
+void printArr( vector<int> a,  int n )  { rep(i,n) cout<<  a[i]<<' '; cout<<endl; }
 
 void solve()
 {

@@ -13,7 +13,6 @@ set path=.,,**
 set conceallevel=0
 set smarttab
 set showtabline=2
-set noshowmode
 set nowritebackup
 set nobackup
 set updatetime=300
@@ -37,11 +36,10 @@ set wrapmargin=0
 """""""""""""""""""""""""""""""""""""
 "KeyBindingsForResizingSplits:
 """""""""""""""""""""""""""""""""""""
-" M == alt
-nnoremap <M-j>    :resize -2<CR>
-nnoremap <M-k>    :resize +2<CR>
-nnoremap <M-h>    :vertical resize -2<CR>
-nnoremap <M-l>    :vertical resize +2<CR>
+nnoremap <C-Up> :resize +2<CR> 
+nnoremap <C-Down> :resize -2<CR>
+nnoremap <C-Left> :vertical resize +2<CR>
+nnoremap <C-Right> :vertical resize -2<CR>
 
 """"""""""""""""""""""""""""""""""""""
 "TabToNextBuffer:
@@ -67,10 +65,10 @@ noremap sv :w<CR>
 """""""""""""""""""""""""""""""""""""""
 " Window Nav:
 """""""""""""""""""""""""""""""""""""""
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <C-H> <C-w>h
+nnoremap <C-J> <C-w>j
+nnoremap <C-K> <C-w>k
+nnoremap <C-L> <C-w>l
 
 """""""""""""""""""""""""""""""""""""""
 "CPP Snippets:
@@ -106,7 +104,6 @@ call plug#begin()
 	Plug 'dense-analysis/ale'
   Plug 'Yggdroot/indentLine'
 	Plug 'wakatime/vim-wakatime'
-	Plug 'bling/vim-airline'
 	Plug 'ervandew/supertab'
 	Plug 'kien/rainbow_parentheses.vim'
 	Plug 'ryanoasis/vim-devicons'
@@ -116,7 +113,6 @@ call plug#begin()
 	Plug 'neoclide/coc.nvim'
 	Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 	Plug 'kevinhwang91/rnvimr', {'do' : 'make sync'}
-  Plug 'vim-airline/vim-airline-themes'
 	Plug 'joshdick/onedark.vim'
   
 "    Plug 'itchyny/lightline.vim'
