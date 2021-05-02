@@ -19,7 +19,11 @@ set updatetime=300
 set timeoutlen=500
 set clipboard=unnamedplus
 inoremap { {<CR>}<Esc>ko
+set encoding=utf-8
+set wildmenu
 set t_Co=256
+"highlight Comment cterm=italic gui=italic
+autocmd FileType cpp let b:coc_pairs_disabled = ["<", "{"]
 "let g:solarized_termcolors=256
 
 " Searching:
@@ -57,7 +61,7 @@ vnoremap > >gv
 "KeyMaps:
 """"""""""""""""""""""""""""""""""""""
 :imap kj <Esc>
-noremap ter :botright vert terminal<CR>
+noremap ter :bot terminal<CR>
 noremap splr :botright vert split<CR>
 noremap spl :split<CR>
 noremap sv :w<CR>
@@ -74,29 +78,21 @@ nnoremap <C-L> <C-w>l
 "CPP Snippets:
 """""""""""""""""""""""""""""""""""""""
 noremap cpp :r ~/.vim/templates/basic.cpp<CR>
-noremap bcpp :r ~/.vim/templates/code.cpp<CR>
-noremap ccpp :r ~/.vim/templates/cp.cpp<CR>
+noremap ccpp :r ~/.vim/templates/code.cpp<CR>
+
 noremap runc :!g++  %  ; ./a.out<CR>
-noremap runt :!g++  %  ; ./a.out < input.txt <CR>
-
-"""""""""""""""""""""""""""""""""""""""
-"CompetitveSnippets:
-"""""""""""""""""""""""""""""""""""""""
-noremap bnrsrch :r ~/.vim/templates/implementations/binarySearch.cpp<CR>
-
+noremap runt :!g++  %  ; ./a.out < input.txt > output.txt<CR><CR>
+"Auto reloads the output file or any file that is changed while running in vim
+set autoread
+au CursorHold * checktime
 
 "ColorTheme:
 set background=dark
 colorscheme gruvbox
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "VimPluginsUsingPlug:
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 call plug#begin()
 	Plug 'Igorjan94/codeforces.vim'
 	Plug 'skammer/vim-css-color'
@@ -115,70 +111,21 @@ call plug#begin()
 	Plug 'kevinhwang91/rnvimr', {'do' : 'make sync'}
 	Plug 'joshdick/onedark.vim'
   
-"    Plug 'itchyny/lightline.vim'
 call plug#end()
-"End vim-plug manager
 
 " Automatically install missing plugins on startup
 autocmd VImEnter *
 	\ if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 	\|   PlugInstall --sync | q
 	\|endif
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AutoCloses the install screen
 let g:autoclose_on=0
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"AirlineConfig:
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'base16_gruvbox_dark_hard'
-let g:airline#extensions#tabline#enabled = 1
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-" Unicode Symbols:
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-
-" Airline Symbols:
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-highlight Comment cterm=italic gui=italic
-autocmd FileType cpp let b:coc_pairs_disabled = ["<", "{"]
 
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "TrailingSpaces:
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! CleanExtraSpaces() "Function to clean unwanted spaces
@@ -190,7 +137,6 @@ function! CleanExtraSpaces() "Function to clean unwanted spaces
 endfun
 
 
-
 au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.cs,*.rkt,*.h,*.html
     \ set tabstop=4 |
     \ set softtabstop=4 |
@@ -199,6 +145,3 @@ au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.cs,*.rkt,*.h,*.html
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
-
-set encoding=utf-8
-set wildmenu

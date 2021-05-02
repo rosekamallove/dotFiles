@@ -6,12 +6,20 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.AutoMaster
+--import XMonad.Actions.Volume
+import XMonad.Util.Dzen
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+alert = dzenConfig centered . show . round
+centered =
+        onCurr (center 150 66)
+    >=> font "-*-helvetica-*-r-*-*-64-*-*-*-*-*-*-*"
+    >=> addArgs ["-fg", "#282828"]
+    >=> addArgs ["-bg", "#dr869b"]
 
 myFont :: String
-myFont = "xft:Cascadia Code:regular:size=9:antialias=true:hinting=true"
+myFont = "xft:FiraCode Nerd Font:regular:size=10:antialias=true:hinting=true"
 
 myTerminal      = "alacritty"
 
@@ -38,7 +46,6 @@ myFocusedBorderColor = "#8ec07c"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
-
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
@@ -53,8 +60,20 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch Chrome
     , ((modm .|. shiftMask, xK_g    ), spawn "google-chrome")
 
+    -- launch nautilus
+    , ((modm .|. shiftMask, xK_f    ), spawn "nautilus")
+
     -- launch Qute Browser
     , ((modm .|. shiftMask, xK_b    ), spawn "qutebrowser")
+
+    -- launch audio
+    , ((modm .|. shiftMask, xK_a    ), spawn "pavucontrol")
+
+    -- Lock the screen
+    , ((modm .|. shiftMask, xK_l    ), spawn "xscreensaver-command --lock")
+
+    -- launch Vs Code
+    , ((modm .|. shiftMask, xK_v    ), spawn "code")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -103,6 +122,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+
+    -- Volume Control
+    , ((modm              , xK_F3)    , spawn "amixer -D pulse sset Master 5%+")
+    , ((modm              , xK_F2)    , spawn "amixer -D pulse sset Master 5%-")
+    , ((modm              , xK_F1)    , spawn "amixer -D pulse sset Master 0%")
+
+    -- Brightness Control
+    , ((modm                 , xK_F7)    , spawn "light -A 5")
+    , ((modm                 , xK_F6)    , spawn "light -U 5")
+
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -175,7 +204,7 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
      tiled   = Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
-     nmaster = 2
+     nmaster = 1
 
      -- Default proportion of screen occupied by master pane
      ratio   = 1/2
@@ -200,6 +229,7 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
 --
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
+    , className =? "pavucontrol"    --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
@@ -232,8 +262,9 @@ myLogHook = return ()
 --
 -- By default, do nothing.
 myStartupHook = do
-    spawnOnce  "nitrogen --restore &"
+    spawnOnce  "nitrogen --set-zoom-fill --random ~/Downloads/gruvboxWallpaper/ &"
     spawnOnce  "compton &"
+    spawnOnce  "xscreensaver &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -241,7 +272,7 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-    xmproc <- spawnPipe "xmobar -x 0 /home/rose/.config/xmobar/xmobarrc"
+    xmproc <- spawnPipe "xmobar -x 0 /home/rosekamallove/.config/xmobar/xmobarrc"
     xmonad $ docks defaults
 
 -- A structure containing your configuration settings, overriding
