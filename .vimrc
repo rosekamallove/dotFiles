@@ -88,7 +88,8 @@ au CursorHold * checktime
 
 "ColorTheme:
 set background=dark
-colorscheme gruvbox
+"colorscheme gruvbox
+colorscheme atom-dark-256
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "VimPluginsUsingPlug:

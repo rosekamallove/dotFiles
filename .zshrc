@@ -17,16 +17,19 @@ _comp_options+=(globdots)
 alias ls="exa --icons --group-directories-first"
 alias ll="exa -l --icons --group-directories-first -h"
 alias lt="exa -T --icons"
-alias la="exa -a -l --icons --group-directories-first"
+alias la="exa -a -l --icons --group-directories-first -h"
 alias rr="ranger"
 alias ga="git add"
 alias gcm="git commit -m"
+alias gp="git push"
 alias aud="pavucontrol"
-alias wall="nitrogen --set-zoom-fill --random ~/Downloads/gruvboxWallpaper"
+alias wall="nitrogen --set-zoom-fill --random ~/Wallpapers"
 alias lower="light -U"
 alias incrs="light -A"
-alias chef="cd ~/Documents/CodeChef/Contests"
-alias contest="touch {1..6}.cpp input.txt output.txt ; vim ."
+alias chef="cd ~/Documents/Competitve/CC/Contests"
+alias forces="cd ~/Documents/Competitve/CF/Contests"
+alias contest="cp -a ~/.vim/templates/base/. ./; vim -S cp.vim"
+
 
 #Startup:
 pfetch

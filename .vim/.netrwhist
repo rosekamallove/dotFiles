@@ -1,7 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/rosekamallove/.vim/templates/base'
+let g:netrw_dirhist_1='/home/rosekamallove/Documents/Competitve/CF/Contests/719-3'
+let g:netrw_dirhist_0='/home/rosekamallove/.config/alacritty'
+let g:netrw_dirhist_9='/home/rosekamallove/.xmonad'
+let g:netrw_dirhist_8='/home/rosekamallove/.xmonad/xpm'
+let g:netrw_dirhist_7='/home/rosekamallove/Documents/CodeChef/Contests/April21/Lng'
+let g:netrw_dirhist_6='/home/rosekamallove'
 let g:netrw_dirhist_5='/home/rosekamallove/Documents/CodeChef/Contests/April21/COOK123C'
 let g:netrw_dirhist_4='/home/rose/.config/alacritty'
 let g:netrw_dirhist_3='/home/rose'
-let g:netrw_dirhist_2='/home/rose/Desktop/CodeForces/710-div3'
-let g:netrw_dirhist_1='/home/rose/Desktop/CodeForces'
