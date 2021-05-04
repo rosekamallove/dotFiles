@@ -1,4 +1,4 @@
-Config { font = "xft:Fira Code Nerd Font:pixelsize=11:antialias=true:hinting=true"
+Config { font = "xft:Fira Code Nerd Font:pixelsize=11.5:weight=600:antialias=true:hinting=true"
        , additionalFonts = []
        , borderColor = "black"
        , border = TopB
@@ -12,7 +12,7 @@ Config { font = "xft:Fira Code Nerd Font:pixelsize=11:antialias=true:hinting=tru
        , pickBroadest = False
        , persistent = False
        , hideOnStart = False
-       , iconRoot = "/home/rose/.xmonad/xpm" --default: "."
+       , iconRoot = "/home/rosekamallove/.xmonad/xpm" --default: "."
        , allDesktops = True
        , overrideRedirect = True
        , commands = [ Run Weather "EGPF" ["-t","<station>: <tempC>C",
@@ -23,9 +23,10 @@ Config { font = "xft:Fira Code Nerd Font:pixelsize=11:antialias=true:hinting=tru
                     , Run Network "eth0" ["-L","0","-H","32",
                                           "--normal","green","--high","red"] 10
                     , Run Cpu ["-t", " <total> %", "-L","3","-H","50",
-                               "--normal","#42f59e","--high","#f54242"] 1
+                               "--normal","#8ec07c","--high","#fb4934"] 1
                     , Run Memory ["-t"," <usedratio>%"] 10
 										, Run Com "light" ["-G"] "brightness" 1
+										--, Run Com "cat" [" /sys/class/power_supply/BAT1/capacity"] "battery" 1
 										, Run Battery        [ "--template" , "<acstatus>"
                              , "--Low"      , "10"        -- units: %
                              , "--High"     , "80"        -- units: %
@@ -37,11 +38,11 @@ Config { font = "xft:Fira Code Nerd Font:pixelsize=11:antialias=true:hinting=tru
                                        -- discharging status
                                        , "-o"    , " <left>% <fc=#efaf5b> (<timeleft>) </fc>"
                                        -- AC "on" status
-                                       , "-O"    , "<fc=#dd5d6c>Currently Charging</fc>"
+                                       , "-O"    , "<fc=#8ec07c>Charging</fc><fc=#b8bb26> (<left>)</fc>"
                                        -- charged status
-                                       , "-i"    , "<fc=#60e9ff>Fully Charged</fc>"
-                             ] 50
-										, Run DynNetwork     [ "--template" , " <tx> <rx>"
+                                       , "-i"    , "<fc=#8ec07c>Fully Charged</fc>"
+                             ] 1
+										, Run DynNetwork     [ "--template" , "  <tx>  <rx>"
                              , "--Low"      , "1000"       -- units: B/s
                              , "--High"     , "5000"       -- units: B/s
                              , "--low"      , "#98b7d1"
@@ -62,10 +63,10 @@ Config { font = "xft:Fira Code Nerd Font:pixelsize=11:antialias=true:hinting=tru
                              , "--normal"   , "#ead581"
                              , "--high"     , "#6f90c9"
                              ] 50
-										, Run Com "acpi" [] "battery" 1
+										-- , Run Com "acpi" [] "battery" 1
                     , Run Date "%a %b %_d %H:%M" "date" 10
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "  <fc=#fb4934> %whoami% </fc>  <fc=#fabd2f> %brightness% </fc>  <fc=#8ec07c>%cpu%</fc>   <fc=#938374> %memory% </fc> }{ <fc=#98b7d1> %dynnetwork% </fc>  %date%    %Battery% <fc=#fe8019>  %coretemp%</fc> "
+       , template = "<fc=#98b7d1>  </fc><fc=#fb4934> %whoami% </fc>  <fc=#fabd2f> %brightness% </fc>  <fc=#8ec07c>%cpu%</fc>   <fc=#938374> %memory% </fc> } <fc=#a89984> %date%</fc>{<fc=#98b7d1>%dynnetwork%</fc>   %battery% <icon=cpu_20.xpm/>"
 

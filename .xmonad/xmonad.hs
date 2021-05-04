@@ -1,4 +1,3 @@
-
 import XMonad
 import Data.Monoid
 import System.Exit
@@ -19,7 +18,7 @@ centered =
     >=> addArgs ["-bg", "#dr869b"]
 
 myFont :: String
-myFont = "xft:FiraCode Nerd Font:regular:size=10:antialias=true:hinting=true"
+myFont = "xft:CaskaydiaCove NF:regular:size=10:antialias=true:hinting=true"
 
 myTerminal      = "alacritty"
 
@@ -51,11 +50,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
-    -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
-
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p    ), spawn "gmrun")
+    -- launch rofi
+    , ((modm,               xK_p     ), spawn "rofi -modi drun -show drun -drun-icon-theme Yosa Max -show-icons")
 
     -- launch Chrome
     , ((modm .|. shiftMask, xK_g    ), spawn "google-chrome")
@@ -70,7 +66,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_a    ), spawn "pavucontrol")
 
     -- Lock the screen
-    , ((modm .|. shiftMask, xK_l    ), spawn "xscreensaver-command --lock")
+   --, ((modm .|. shiftMask, xK_l    ), spawn "xscreensaver-command --lock")
+   , ((modm .|. shiftMask, xK_l    ), spawn "i3lock")
 
     -- launch Vs Code
     , ((modm .|. shiftMask, xK_v    ), spawn "code")
@@ -230,6 +227,8 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "pavucontrol"    --> doFloat
+    , className =? "gnome-calculator"    --> doFloat
+    , className =? "albert"         --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
@@ -262,9 +261,9 @@ myLogHook = return ()
 --
 -- By default, do nothing.
 myStartupHook = do
-    spawnOnce  "nitrogen --set-zoom-fill --random ~/Downloads/gruvboxWallpaper/ &"
-    spawnOnce  "compton &"
-    spawnOnce  "xscreensaver &"
+    spawnOnce  "nitrogen --set-zoom-fill --random /usr/share/backgrounds &"
+    --spawnOnce  "compton --config /home/rosekamallove/.config/compton/compton.conf &"
+    spawnOnce  "picom &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
