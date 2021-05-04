@@ -81,7 +81,7 @@ noremap cpp :r ~/.vim/templates/basic.cpp<CR>
 noremap ccpp :r ~/.vim/templates/code.cpp<CR>
 
 noremap runc :!g++  %  ; ./a.out<CR>
-noremap runt :!g++  %  ; ./a.out < input.txt > output.txt<CR><CR>
+noremap runt :!g++  %  ; ./a.out < inp.txt > out.txt;diff exp.txt out.txt > dif.txt<CR><CR>
 "Auto reloads the output file or any file that is changed while running in vim
 set autoread
 au CursorHold * checktime
