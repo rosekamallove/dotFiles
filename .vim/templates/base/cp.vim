@@ -39,15 +39,15 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 90 + 70) / 140)
-exe '2resize ' . ((&lines * 15 + 32) / 65)
-exe 'vert 2resize ' . ((&columns * 49 + 70) / 140)
-exe '3resize ' . ((&lines * 15 + 32) / 65)
-exe 'vert 3resize ' . ((&columns * 49 + 70) / 140)
-exe '4resize ' . ((&lines * 15 + 32) / 65)
-exe 'vert 4resize ' . ((&columns * 49 + 70) / 140)
-exe '5resize ' . ((&lines * 14 + 32) / 65)
-exe 'vert 5resize ' . ((&columns * 49 + 70) / 140)
+exe 'vert 1resize ' . ((&columns * 100 + 70) / 140)
+exe '2resize ' . ((&lines * 9 + 32) / 65)
+exe 'vert 2resize ' . ((&columns * 39 + 70) / 140)
+exe '3resize ' . ((&lines * 19 + 32) / 65)
+exe 'vert 3resize ' . ((&columns * 39 + 70) / 140)
+exe '4resize ' . ((&lines * 9 + 32) / 65)
+exe 'vert 4resize ' . ((&columns * 39 + 70) / 140)
+exe '5resize ' . ((&lines * 22 + 32) / 65)
+exe 'vert 5resize ' . ((&columns * 39 + 70) / 140)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -67,7 +67,7 @@ keepjumps 1
 normal! 0
 wincmd w
 argglobal
-if bufexists("input.txt") | buffer input.txt | else | edit input.txt | endif
+if bufexists("inp.txt") | buffer inp.txt | else | edit inp.txt | endif
 balt 1.cpp
 setlocal fdm=manual
 setlocal fde=0
@@ -79,7 +79,7 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 7) / 15)
+let s:l = 1 - ((0 * winheight(0) + 4) / 9)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -87,7 +87,7 @@ keepjumps 1
 normal! 0
 wincmd w
 argglobal
-if bufexists("output.txt") | buffer output.txt | else | edit output.txt | endif
+if bufexists("out.txt") | buffer out.txt | else | edit out.txt | endif
 balt 1.cpp
 setlocal fdm=manual
 setlocal fde=0
@@ -99,7 +99,7 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 7) / 15)
+let s:l = 1 - ((0 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -107,7 +107,7 @@ keepjumps 1
 normal! 0
 wincmd w
 argglobal
-if bufexists("expected.txt") | buffer expected.txt | else | edit expected.txt | endif
+if bufexists("exp.txt") | buffer exp.txt | else | edit exp.txt | endif
 balt 1.cpp
 setlocal fdm=manual
 setlocal fde=0
@@ -119,7 +119,7 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 7) / 15)
+let s:l = 1 - ((0 * winheight(0) + 4) / 9)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -127,7 +127,7 @@ keepjumps 1
 normal! 0
 wincmd w
 argglobal
-if bufexists("diff.txt") | buffer diff.txt | else | edit diff.txt | endif
+if bufexists("dif.txt") | buffer dif.txt | else | edit dif.txt | endif
 balt 1.cpp
 setlocal fdm=manual
 setlocal fde=0
@@ -139,28 +139,28 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 7) / 14)
+let s:l = 1 - ((0 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 1
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 90 + 70) / 140)
-exe '2resize ' . ((&lines * 15 + 32) / 65)
-exe 'vert 2resize ' . ((&columns * 49 + 70) / 140)
-exe '3resize ' . ((&lines * 15 + 32) / 65)
-exe 'vert 3resize ' . ((&columns * 49 + 70) / 140)
-exe '4resize ' . ((&lines * 15 + 32) / 65)
-exe 'vert 4resize ' . ((&columns * 49 + 70) / 140)
-exe '5resize ' . ((&lines * 14 + 32) / 65)
-exe 'vert 5resize ' . ((&columns * 49 + 70) / 140)
+exe 'vert 1resize ' . ((&columns * 100 + 70) / 140)
+exe '2resize ' . ((&lines * 9 + 32) / 65)
+exe 'vert 2resize ' . ((&columns * 39 + 70) / 140)
+exe '3resize ' . ((&lines * 19 + 32) / 65)
+exe 'vert 3resize ' . ((&columns * 39 + 70) / 140)
+exe '4resize ' . ((&lines * 9 + 32) / 65)
+exe 'vert 4resize ' . ((&columns * 39 + 70) / 140)
+exe '5resize ' . ((&lines * 22 + 32) / 65)
+exe 'vert 5resize ' . ((&columns * 39 + 70) / 140)
 tabnext 1
 badd +1 1.cpp
-badd +0 input.txt
-badd +0 output.txt
-badd +0 expected.txt
-badd +0 diff.txt
+badd +0 inp.txt
+badd +0 out.txt
+badd +0 exp.txt
+badd +0 dif.txt
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
