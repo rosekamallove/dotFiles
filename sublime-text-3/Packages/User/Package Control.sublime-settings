@@ -1,0 +1,26 @@
+{
+	"bootstrapped": true,
+	"installed_packages":
+	[
+		"A File Icon",
+		"auto-save",
+		"ayu",
+		"Color Scheme - Pastels UI",
+		"gruvbox",
+		"Material Theme",
+		"Nord",
+		"One Dark Material - Theme",
+		"Package Control",
+		"Solarized Color Scheme",
+		"SublimeAStyleFormatter",
+		"SublimeLinter",
+		"SublimeLinter-cppcheck",
+		"SublimeLinter-cpplint",
+		"SublimeLinter-gcc",
+		"Terminus",
+		"VIM Navigation",
+	],
+	"in_process_packages":
+	[
+	],
+}

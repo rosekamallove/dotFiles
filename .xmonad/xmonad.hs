@@ -5,6 +5,7 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.AutoMaster
+import XMonad.Hooks.EwmhDesktops
 --import XMonad.Actions.Volume
 import XMonad.Util.Dzen
 import qualified XMonad.StackSet as W
@@ -40,8 +41,10 @@ myModMask       = mod1Mask
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
-myNormalBorderColor  = "#282c34"
-myFocusedBorderColor = "#8ec07c"
+myNormalBorderColor  = "#4c566a"
+-- myFocusedBorderColor = "#c678dd" (Purple)
+-- myFocusedBorderColor = "#abb3bf" (Gray)
+myFocusedBorderColor = "#83c092" 
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -51,10 +54,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch rofi
-    , ((modm,               xK_p     ), spawn "rofi -modi drun -show drun -drun-icon-theme Yosa Max -show-icons")
+    , ((modm,               xK_p     ), spawn "rofi -modi drun -theme slate  -show drun -icon-theme Papirus -show-icons")
 
-    -- launch Chrome
-    , ((modm .|. shiftMask, xK_g    ), spawn "google-chrome")
+    -- launch Brave
+    , ((modm .|. shiftMask, xK_g    ), spawn "brave-browser")
 
     -- launch nautilus
     , ((modm .|. shiftMask, xK_f    ), spawn "nautilus")
@@ -67,10 +70,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Lock the screen
    --, ((modm .|. shiftMask, xK_l    ), spawn "xscreensaver-command --lock")
-   , ((modm .|. shiftMask, xK_l    ), spawn "i3lock")
+   , ((modm .|. shiftMask, xK_l    ), spawn "i3lock -b -f -i ~/Wallpapers/nord/yz6ggt7m18l41.png")
+
+    --Wallpaper
+   , ((modm .|. shiftMask, xK_w    ), spawn "nitrogen --set-zoom-fill --random ~/Wallpapers &")
 
     -- launch Vs Code
     , ((modm .|. shiftMask, xK_v    ), spawn "code")
+
+    -- launch Vs Sublime
+    , ((modm .|. shiftMask, xK_s    ), spawn "subl")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -130,11 +139,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm                 , xK_F6)    , spawn "light -U 5")
 
 
-    -- Toggle the status bar gap
-    -- Use this binding with avoidStruts from Hooks.ManageDocks.
-    -- See also the statusBar function from Hooks.DynamicLog.
-    --
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
+    --Hide Xmobar
+    , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
@@ -147,19 +153,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
     ++
 
-    --
-    -- mod-[1..9], Switch to workspace N
-    -- mod-shift-[1..9], Move client to workspace N
-    --
+    --Switch Workspaces   
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
-
-    --
-    -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
-    --
+    --Switch Monitors
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
@@ -167,7 +166,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
---
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- mod-button1, Set the window to floating mode and move by dragging
@@ -186,52 +184,28 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
 ------------------------------------------------------------------------
 -- Layouts:
-
--- You can specify and transform your layouts by modifying these values.
--- If you change layout bindings be sure to use 'mod-shift-space' after
--- restarting (with 'mod-q') to reset your layout state to the new
--- defaults, as xmonad preserves your old layout settings by default.
---
--- The available layouts.  Note that each layout is separated by |||,
--- which denotes layout choice.
---
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = avoidStruts (tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
-
      -- The default number of windows in the master pane
      nmaster = 1
-
      -- Default proportion of screen occupied by master pane
      ratio   = 1/2
-
      -- Percent of screen to increment by when resizing panes
-     delta   = 3/100
+     delta   = 2/100
 
 ------------------------------------------------------------------------
 -- Window rules:
-
--- Execute arbitrary actions and WindowSet manipulations when managing
--- a new window. You can use this to, for example, always float a
--- particular program, or have a client always appear on a particular
--- workspace.
---
--- To find the property name associated with a program, use
--- > xprop | grep WM_CLASS
--- and click on the client you're interested in.
---
--- To match on the WM_NAME, you can use 'title' in the same way that
--- 'className' and 'resource' are used below.
---
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "pavucontrol"    --> doFloat
-    , className =? "gnome-calculator"    --> doFloat
-    , className =? "albert"         --> doFloat
-    , className =? "Gimp"           --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    [ className =? "MPlayer"          --> doFloat
+    , className =? "pavucontrol"      --> doFloat
+    , className =? "gnome-calculator" --> doFloat
+    , className =? "Blueman-manager"  --> doFloat
+    , className =? "Pavucontrol"      --> doFloat
+    , className =? "Gimp"             --> doFloat
+    , resource  =? "desktop_window"   --> doIgnore
+    , resource  =? "kdesktop"         --> doIgnore ]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -246,24 +220,15 @@ myEventHook = mempty
 
 ------------------------------------------------------------------------
 -- Status bars and logging
-
--- Perform an arbitrary action on each internal state change or X event.
--- See the 'XMonad.Hooks.DynamicLog' extension for examples.
---
 myLogHook = return ()
 
 ------------------------------------------------------------------------
 -- Startup hook
-
--- Perform an arbitrary action each time xmonad starts or is restarted
--- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
--- per-workspace layout choices.
---
--- By default, do nothing.
 myStartupHook = do
-    spawnOnce  "nitrogen --set-zoom-fill --random /usr/share/backgrounds &"
+    spawnOnce  "nitrogen --set-zoom-fill --random ~/Wallpapers/forest &"
     --spawnOnce  "compton --config /home/rosekamallove/.config/compton/compton.conf &"
     spawnOnce  "picom &"
+    spawnOnce  "brave-browser &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -271,9 +236,9 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-    xmproc <- spawnPipe "xmobar -x 0 /home/rosekamallove/.config/xmobar/xmobarrc"
+    --xmonad $ ewmh def{handleEventHook = handleEventHook def <+> fullscreenEventHook }
+    xmproc <- spawnPipe "xmobar -x 0 /home/rosekamallove/.xmonad/xmobar/xmobarrc.hs"
     xmonad $ docks defaults
-
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
 -- use the defaults defined in xmonad/XMonad/Config.hs

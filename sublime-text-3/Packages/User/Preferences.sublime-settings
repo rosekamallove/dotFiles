@@ -1,0 +1,39 @@
+{
+      "linters":
+      {
+          "gcc": {
+              "disable": false,
+              "executable": ["gcc"],
+              "args": ["-fsyntax-only", "-std=c90"],
+              "I": [
+                  "${file_path}/include",
+                  "${folder}/include",
+                  "/usr/local/include",
+      ],
+              "excludes": [],
+          },
+          "g++": {
+              "disable": false,
+              "executable": ["g++"],
+              "args": ["-fsyntax-only", "-std=c++17"],
+              "I": [
+                  "${file_path}/include",
+                  "${folder}/include",
+                  "/usr/local/include",
+      ],
+              "excludes": [],
+          },
+      },
+	"shell_cmd": ["g++", "-std=c++17", "#{file}", "-o", ".z.out", ";", "./.z.out<.zin.txt>.zot.txt", ";", "diff", ".zex.txt", ".zot.txt",">",".zdf.txt"],
+	"shell":true,
+	"workin_dir":"$file_path",
+	"selector":"source.cpp",
+	"theme": "Adaptive.sublime-theme",
+	"font_face": "CaskaydiaCove NF",
+	"font_size": 11,
+	"auto_save_on_modified": true,
+	"ignored_packages":
+	[
+  ],
+	"color_scheme": "Packages/One Dark Material - Theme/schemes/OneDark.tmTheme",
+}
