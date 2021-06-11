@@ -1,15 +1,5 @@
 export EDITOR=vim;
 export VISUAL=vim;
-#bindkey -v
-
-#Exports:
-
-# Bat as a manpager
-#export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-#vim a a manpager
-#export MANPAGER='/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
-
 
 #Enable Colors:
 autoload -U colors && colors
@@ -33,6 +23,7 @@ alias la="exa -a -l --icons --group-directories-first -h"
 alias rr="ranger"
 
 #Git
+alias g="git"
 alias ga="git add"
 alias gcm="git commit -m"
 alias gp="git push"
@@ -42,18 +33,28 @@ alias gs="git status"
 alias wall="nitrogen --set-zoom-fill --random ~/Wallpapers"
 alias lower="light -U"
 alias incrs="light -A"
+alias clr="clear"
+alias tasks="./tasks.sh"
+
+alias reactx="npx create-react-app"
 
 #Competitve
-alias chef="cd ~/Documents/Competitve/CC/Contests"
-alias forces="cd ~/Documents/Competitve/CF/Contests"
-alias txt="touch .zin.txt .zot.txt .zdf.txt .zex.txt"
-#alias contest="cp -a ~/.vim/templates/base/. ./;
-#							 ll;
-#							 vim -S cp.vim"
+alias cc="cd ~/Documents/Competitve/CC/Contests"
+alias cf="cd ~/Documents/Competitve/CF/Contests"
+alias cses="cd ~/Documents/Competitve/CSES/"
+alias practice="cd ~/Documents/Competitve/CF/Practice"
+alias txt="touch .zin.txt .zot.txt .zdf.txt .zex.txt .deb.txt"
+alias cnt="cd ~/Contest ; vimz"
+alias ncnt="brave-browser --new-window https://codeforces.com/contests ; cd ~/Contest ; new ; vimz"
 alias vimz="vim -S .cp.vim"
+alias new="rm {A..I}.cpp ; touch {A..I}.cpp ; cat ~/.vim/templates/code.cpp >> {A..I}.cpp ;rm .zin.txt .zot.txt .zdf.txt .zex.txt .deb.txt; txt"
+alias news="rm {A..I}.cpp ; touch {A..I}.cpp ; cat ~/.vim/templates/code2.cpp >> {A..I}.cpp; rm .inp.txt .out.txt ; touch .inp.txt .out.txt"
 
 
 #Startup:
-pfetch
+#pfetch
+./tasks.sh
+bindkey -v
+bindkey kj vi-cmd-mode
 eval "$(starship init zsh)"
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

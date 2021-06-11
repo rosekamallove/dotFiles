@@ -1,9 +1,9 @@
 	Config { 
 
-			 font               = "xft:Fira Code Nerd Font:pixelsize=11:weight=800:antialias=true:hinting=true"
+			 font               = "xft:Fira Code Nerd Font:pixelsize=12:weight=800:antialias=true:hinting=true"
 			 , additionalFonts    = []
-			 , bgColor            = "#2b3339"
-			 , fgColor            = "#d3c6aa"
+			 , bgColor            = "#002b36"
+			 , fgColor            = "#839496"
 			 , alpha              = 255 
 			 , position           = Top
 			 , textOffset         = -1
@@ -20,8 +20,8 @@
 			 [  					 Run Cpu           ["-t", " <total> %"
 																			 ,"-L"           ,"3"
 																			 ,"-H"           ,"50"
-																			 ,"--normal"     ,"#dbbc7f"
-																			 ,"--high"       ,"#83c092"
+																			 ,"--normal"     ,"#839496"
+																			 ,"--high"       ,"#d30102"
 																			 ] 1
 										, Run Memory         ["-t"," <usedratio>%"] 10
 										, Run Com "light"    ["-G"] "brightness" 1
@@ -29,32 +29,32 @@
 										, Run Battery        [ "--template" , "<acstatus>"
 																				 , "--Low"      , "10"        -- units: %
 																				 , "--High"     , "80"        -- units: %
-																				 , "--low"      , "#e67e80"
-																				 , "--normal"   , "#83c6aa"
-																				 , "--high"     , "#83c092"
+																				 , "--low"      , "#d30102"
+																				 , "--normal"   , "#839496"
+																				 , "--high"     , "#859900"
 
 																				 , "--" -- battery specific options
 																									 -- discharging status
-																									 , "-o"    , " <left>% <fc=#ebcb8b> (<timeleft>) </fc>"
+																									 , "-o"    , " <left>% <fc=#b58900> (<timeleft>) </fc>"
 																									 -- AC "on" status
-																									 , "-O"    , "<fc=#a3be8c></fc><fc=#ebcb8b> (<left>)</fc>"
+																									 , "-O"    , "<fc=#a3be8c></fc><fc=#859900> (<left>)</fc>"
 																									 -- charged status
-																									 , "-i"    , "<fc=#a3be8c></fc>"
+																									 , "-i"    , "<fc=#859900></fc>"
 																				 ] 1
 										, Run DynNetwork     [ "--template" , "  <tx>  <rx>"
 																				 , "--Low"      , "1000"       -- units: B/s
 																				 , "--High"     , "5000"       -- units: B/s
-																				 , "--low"      , "#e67e80"
-																				 , "--normal"   , "#d3c6aa"
-																				 , "--high"     , "#83c092"
+																				 , "--low"      , "#d30102"
+																				 , "--normal"   , "#2aa198"
+																				 , "--high"     , "#859900"
 																				 ] 10
 
 
 										, Run Memory         [ "--template" ,"<usedratio>%"
 																				 , "--Low"      , "20"        -- units: %
 																				 , "--High"     , "90"        -- units: %
-																				 , "--low"      , "#d3c6aa"
-																				 , "--normal"   , "#dbbc7f"
+																				 , "--low"      , "#859900"
+																				 , "--normal"   , "#839496"
 																				 , "--high"     , "#e67e80"
 																				 ] 10
 
@@ -62,4 +62,4 @@
 										]
 			 , sepChar = "%"
 			 , alignSep = "}{"
-			 , template = "<fc=#7fbbb3>  </fc> <fc=#d699b6> %tasks% </fc>}  <fc=#83c092> %date%</fc> { <fc=#dbbc7f> %brightness% </fc>  <fc=#c2d94c>%cpu%</fc>   <fc=#ffee99> %memory% </fc> <fc=#6994bf>%dynnetwork%</fc>  %battery% "
+			 , template = "<fc=#268bd2>  </fc> <fc=#2aa198> %tasks% </fc>}   %date% { <fc=#b58900> %brightness% </fc>  <fc=#b58900>%cpu%</fc>   <fc=#839496> %memory% </fc> <fc=#2aa198>%dynnetwork%</fc>  %battery% "

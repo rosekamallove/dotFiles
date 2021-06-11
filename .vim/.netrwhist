@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =2
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/home/rosekamallove'
 let g:netrw_dirhist_2='/home/rosekamallove/.config/nvim'
 let g:netrw_dirhist_1='/home/rosekamallove/Documents/imageGallery/photos'
 let g:netrw_dirhist_0='/home/rosekamallove/Documents/musicRooms/frontend/src'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_7='/home/rosekamallove/Documents/Competitve/CC/Contests/May2
 let g:netrw_dirhist_6='/home/rosekamallove/Documents/Crap/stuffings/src'
 let g:netrw_dirhist_5='/home/rosekamallove/Documents/Crap/stuffings'
 let g:netrw_dirhist_4='/home/rosekamallove/.vim/templates/base'
-let g:netrw_dirhist_3='/home/rosekamallove/Documents/Competitve/CC/Contests/April21/Lng'

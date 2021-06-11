@@ -17,8 +17,9 @@ template <class T>          void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T>          void _print(multiset <T> v);
 template<typename... T>     void read(T&... args);
-template<typename... T>     void write(T&... args);
-
+template<typename... T>     void write(string delimiter, T &&...args);
+template<typename T>        void readContainer(T &t);
+template<typename T>        void writeContainer(string delimiter, T &t);
 //----------------------------------------------------------------------------------------------------//
 
 void solve(){
@@ -40,17 +41,33 @@ signed main(){
     while (T--){
         solve();
     }
+    cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
 }
 
 //----------------------------------------------------------------------------------------------------//
-template<typename... T>
-void read(T&... args){
-    ((cin>>args), ...);
+template <typename... T>
+void read(T &...args) {
+    ((cin >> args), ...);
 }
 
-template<typename... T>
-void write(T&... args){
-    ((cout<<args<<' '), ...);
+template <typename... T>
+void write(string delimiter, T &&...args) {
+    ((cout << args << delimiter), ...);
+}
+
+template <typename T>
+void readContainer(T &t) {
+    for (auto &e : t) {
+        read(e);
+    }
+}
+
+template <typename T>
+void writeContainer(string delimiter, T &t) {
+    for (const auto &e : t) {
+        write(delimiter, e);
+    }
+    write("\n");
 }
 
 template<typename T> 

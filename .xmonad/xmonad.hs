@@ -19,7 +19,7 @@ centered =
     >=> addArgs ["-bg", "#dr869b"]
 
 myFont :: String
-myFont = "xft:CaskaydiaCove NF:regular:size=10:antialias=true:hinting=true"
+myFont = "xft:FiraCode Nerd Font Mono :Regular:size=12:antialias=true:hinting=true"
 
 myTerminal      = "alacritty"
 
@@ -41,10 +41,10 @@ myModMask       = mod1Mask
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
-myNormalBorderColor  = "#4c566a"
+myNormalBorderColor  = "#4b565c"
 -- myFocusedBorderColor = "#c678dd" (Purple)
 -- myFocusedBorderColor = "#abb3bf" (Gray)
-myFocusedBorderColor = "#83c092" 
+myFocusedBorderColor = "#2aa198" 
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -55,6 +55,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch rofi
     , ((modm,               xK_p     ), spawn "rofi -modi drun -theme slate  -show drun -icon-theme Papirus -show-icons")
+
+    -- launch dmenu
+    , ((modm,               xK_d     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
 
     -- launch Brave
     , ((modm .|. shiftMask, xK_g    ), spawn "brave-browser")
@@ -70,7 +73,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Lock the screen
    --, ((modm .|. shiftMask, xK_l    ), spawn "xscreensaver-command --lock")
-   , ((modm .|. shiftMask, xK_l    ), spawn "i3lock -b -f -i ~/Wallpapers/nord/yz6ggt7m18l41.png")
+   , ((modm .|. shiftMask, xK_l    ), spawn "xscreensaver-command --lock")
 
     --Wallpaper
    , ((modm .|. shiftMask, xK_w    ), spawn "nitrogen --set-zoom-fill --random ~/Wallpapers &")
@@ -225,9 +228,10 @@ myLogHook = return ()
 ------------------------------------------------------------------------
 -- Startup hook
 myStartupHook = do
-    spawnOnce  "nitrogen --set-zoom-fill --random ~/Wallpapers/forest &"
+    spawnOnce  "nitrogen --set-zoom-fill --random ~/Wallpapers/solarized &"
     --spawnOnce  "compton --config /home/rosekamallove/.config/compton/compton.conf &"
-    spawnOnce  "picom &"
+    --spawnOnce  "picom &"
+    --spawnOnce  "xscreensaver &"
     spawnOnce  "brave-browser &"
 
 ------------------------------------------------------------------------
