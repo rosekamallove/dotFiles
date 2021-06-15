@@ -21,122 +21,50 @@ set clipboard=unnamedplus
 set encoding=utf-8
 set wildmenu
 set noshowmode
-
-" Searching:
+set t_Co=16
+" -- Searching -----------------------------------------------
 set ignorecase " Ignore case
 set smartcase  " Don't ignore case if uppercase letter present
-
-"BetterLineWrapping:
+" -- BetterLineWrapping --------------------------------------
 set nowrap
 set linebreak
 set textwidth=0
 set wrapmargin=0
 "set nohlsearch 
 
-"""""""""""""""""""""""""""""""""""""
-"KeyBindingsForResizingSplits:
-"""""""""""""""""""""""""""""""""""""
-nnoremap <C-Up> :resize +2<CR> 
-nnoremap <C-Down> :resize -2<CR>
-nnoremap <C-Left> :vertical resize +2<CR>
-nnoremap <C-Right> :vertical resize -2<CR>
-
-"TabToNextBuffer:
-nnoremap <TAB> :tabnext<CR>
-nnoremap <S-TAB> :tabprevious<CR>
-
-"BetterTabbing:
-vnoremap < <gv
-vnoremap > >gv
-
-""""""""""""""""""""""""""""""""""""""
-"KeyMaps:
-""""""""""""""""""""""""""""""""""""""
-:imap kj <Esc>
-noremap ter  :bot terminal<CR>
-noremap splr :botright vert split<CR>
-noremap spl  :split<CR>
-noremap sv	 :w<CR>
-
-"""""""""""""""""""""""""""""""""""""""
-" Window Nav:
-"""""""""""""""""""""""""""""""""""""""
-nnoremap <C-H> <C-w>h
-nnoremap <C-J> <C-w>j
-nnoremap <C-K> <C-w>k
-nnoremap <C-L> <C-w>l
-
-"""""""""""""""""""""""""""""""""""""""
-"CPP Snippets:
-"""""""""""""""""""""""""""""""""""""""
-noremap cpp :0r ~/.vim/templates/basic.cpp<CR>
-noremap ccpp :0r ~/.vim/templates/code.cpp<CR> 
-"noremap ccpp :call cppTemplate
-
-"function! cppTemplate()
-" if BufRead,BufNewFile *.cpp
-"	|:0r ~/.vim/templates/code.cpp<CR>
-"	|/solve
-"	|<CR>
-"	|:noh
-"	|o
-"endfunction
-
-noremap runc :!clear ; g++ -std=c++17 %  ; ./a.out ; echo "\n<=== Deb: ===>"; cat .deb.txt<CR>
-noremap runt :!clear && g++  -std=c++17 % -o .Z.out ; ./.Z.out < .zin.txt > .zot.txt; diff .zex.txt .zot.txt > .zdf.txt<CR><CR>
-
-set autoread "Auto reloads the output file or any file that is changed while running in vim
-au CursorHold * checktime
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"ColorScheme:
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:lightline = {'colorscheme':'solarized'}
+" -- ColorScheme -------------------------------------------------
+set termguicolors     
 set background=dark
-
-"Everforest:
-"set termguicolors     
-"colorscheme everforest
-"let g:lightline = {'colorscheme':'everforest'}
-"let g:everforest_background = 'hard'
-
-"Solarized:
-colorscheme solarized
-set t_Co=16
-let g:solarized_termcolors=16
+colorscheme one
+let g:lightline = {'colorscheme':'one'} 
+let g:everforest_background = 'hard'
+nnoremap LIT :set background=light<CR>
 
 
-"IndentLines:
-let g:indentLine_char = ''
-let g:indentLine_first_char = ''
-let g:indentLine_showFirstIndentLevel = 1
-let g:indentLine_setColors = 0
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"VimPluginsUsingPlug:
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" -- VimPluginsUsingPlug -----------------------------------------
 call plug#begin()
 
-			"WebDev:
+			" -- WebDev ------------------
 			Plug 'gko/vim-coloresque'
 			Plug 'airblade/vim-gitgutter'
+			Plug 'mattn/emmet-vim'
 
-			"LooksAndFeel:
+			" -- LooksAndFeel ------------
 			Plug 'ryanoasis/vim-devicons'
 			Plug 'dense-analysis/ale'
 			Plug 'airblade/vim-rooter'
 
-			"NERDTree:
+			" -- NERDTree ----------------
 			Plug 'preservim/nerdtree'
 			Plug 'jistr/vim-nerdtree-tabs'
 
-			"Coc:
+			" -- Coc ---------------------
 			Plug 'neoclide/coc.nvim',   {'branc':'release'}
 
-			"LightLine:
+			" -- LightLine ---------------
 			Plug 'itchyny/lightline.vim'
 
-			"Productivity:
+			" -- Productivity ------------
 			Plug 'ctrlpvim/ctrlp.vim'
 			Plug 'djoshea/vim-autoread'
 			Plug 'Yggdroot/indentLine'
@@ -144,7 +72,7 @@ call plug#begin()
 			Plug 'jiangmiao/auto-pairs'
 			Plug 'wakatime/vim-wakatime'
 
-			"SyntaxAndColorSchemes:
+			" -- SyntaxAndColorSchemes ---- 
 			Plug 'ayu-theme/ayu-vim'
 			Plug 'joshdick/onedark.vim'
 			Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
@@ -158,32 +86,102 @@ call plug#begin()
 			Plug 'shinchu/lightline-gruvbox.vim'
 			Plug 'sheerun/vim-polyglot'
 
-			"CustomOperators:
+			" -- CustomOperators ------------
 			Plug 'tpope/vim-surround'
 			Plug 'tpope/vim-repeat'
 			Plug 'christoomey/vim-system-copy'
 
+			" -- CompetitiveProgramming -----
+			Plug 'p00f/cphelper.nvim'
+			Plug 'nvim-lua/plenary.nvim'
+
 call plug#end()
 
-" Automatically install missing plugins on startup
 autocmd VImEnter *
 			\ if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 			\|   PlugInstall --sync | q
 			\|endif
-" AutoCloses the install screen
 let g:autoclose_on=0
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"AleConfig:
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" -- KeyBindingsForResizingSplits -----------------------------
+nnoremap <C-Up> :resize +2<CR> 
+nnoremap <C-Down> :resize -2<CR>
+nnoremap <C-Left> :vertical resize +2<CR>
+nnoremap <C-Right> :vertical resize -2<CR>
+
+" -- TabToNextBuffer ------------------------------------------
+nnoremap <TAB> :tabnext<CR>
+nnoremap <S-TAB> :tabprevious<CR>
+
+" -- BetterTabbing --------------------------------------------
+vnoremap < <gv
+vnoremap > >gv
+
+" -- KeyMaps --------------------------------------------------
+:imap kj <Esc>
+noremap ter  :bot terminal<CR>
+noremap splr :botright vert split<CR>
+noremap spl  :split<CR>
+noremap sv	 :w<CR>
+
+" -- Window Nav -----------------------------------------------
+nnoremap <C-H> <C-w>h
+nnoremap <C-J> <C-w>j
+nnoremap <C-K> <C-w>k
+nnoremap <C-L> <C-w>l
+
+" -- CPP Snippets ---------------------------------------------
+set autoread 
+au CursorHold * checktime
+
+noremap cpp :0r ~/.vim/templates/basic.cpp<CR>
+noremap ccpp :0r ~/.vim/templates/code.cpp<CR> 
+
+nnoremap cpb :
+			\!clear;
+			\cpb test %<CR>
+
+noremap runc : 
+			\	!clear; 
+			\ echo "-- Output ---------------";
+			\ echo "\n";
+			\	g++ -std=c++17 % -o .a.out; 
+			\	./.a.out; 
+			\ echo "\n";
+			\	echo "-- Deb ------------------"; 
+			\	cat .deb.txt
+			\<CR>
+
+noremap runt : 
+			\!clear && g++  -std=c++17 % -o .Z.out;
+			\./.Z.out < .zin.txt > .zot.txt;
+			\diff .zex.txt .zot.txt > .zdf.txt<CR><CR>
+
+
+
+" -- IndentLines -------------------------------------------------
+"let g:indentLine_char = ''
+let g:indentLine_char = '|'
+let g:indentLine_first_char = '|'
+"let g:indentLine_first_char = ''
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_setColors = 0
+
+
+" -- EmmetConfig -----------------------------------------------------------
+"let g:uset_emmet_leader_key=','
+let g:user_emmet_expandabbr_key='<Tab>'
+
+
+
+" -- AleConfig -------------------------------------------------------------
 let g:ale_disable_lsp = 1
 let g:ale_sign_column_always = 0
 let g:ale_sign_error = ''
 let g:ale_sign_warning = ''
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"COCConfig:
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" -- COCConfig -------------------------------------------------------------
 let g:coc_global_extensions = [
 			\ 'coc-snippets',
 			\ 'coc-pairs',
@@ -194,7 +192,6 @@ let g:coc_global_extensions = [
 			\ 'coc-json',
 			\ 'coc-html',
 			\ 'coc-css',
-			\ 'coc-emmet'
 			\ ]
 
 autocmd FileType cpp let b:coc_pairs_disabled = ["<"]
@@ -208,9 +205,7 @@ au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.cs,*.rkt,*.h,*.html
 			\ set autoindent |
 			\ set fileformat=unix |
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"CTRLPConfig:
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" -- CTRLPConfig ----------------------------------------------------------
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
@@ -222,11 +217,8 @@ let g:ctrlp_custom_ignore = {
 			\ 'link': 'some_bad_symbolic_links',
 			\ }
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"NerdTree:
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" -- NerdTree -------------------------------------------------------------
 let g:nerdtree_tabs_open_on_console_startup = 2
-
 "nnoremap <space>e :NERDTreeFind<CR>
 map <space>e <plug>NERDTreeTabsToggle<CR>
 
