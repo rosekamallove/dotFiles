@@ -1,6 +1,6 @@
 	Config { 
 
-			 font               = "xft:Fira Code Nerd Font:pixelsize=12:weight=800:antialias=true:hinting=true"
+			 font               = "xft:Source Code Pro:pixelsize=12:weight=800:antialias=true:hinting=true"
 			 , additionalFonts    = []
 			 , bgColor            = "#002b36"
 			 , fgColor            = "#839496"
