@@ -34,9 +34,9 @@ set wrapmargin=0
 
 " -- ColorScheme -------------------------------------------------
 set termguicolors     
-set background=dark
-colorscheme one
-let g:lightline = {'colorscheme':'one'} 
+set background=light
+colorscheme everforest
+let g:lightline = {'colorscheme':'everforest'} 
 let g:everforest_background = 'hard'
 nnoremap LIT :set background=light<CR>
 
@@ -71,6 +71,7 @@ call plug#begin()
 			Plug 'ervandew/supertab'
 			Plug 'jiangmiao/auto-pairs'
 			Plug 'wakatime/vim-wakatime'
+			Plug 'codota/tabnine-vim'
 
 			" -- SyntaxAndColorSchemes ---- 
 			Plug 'ayu-theme/ayu-vim'
@@ -155,8 +156,8 @@ noremap runc :
 
 noremap runt : 
 			\!clear && g++  -std=c++17 % -o .Z.out;
-			\./.Z.out < .zin.txt > .zot.txt;
-			\diff .zex.txt .zot.txt > .zdf.txt<CR><CR>
+			\./.Z.out < .zin.txt > .zot.md;
+			\diff .zex.txt .zot.md > .zdf.txt<CR><CR>
 
 
 
