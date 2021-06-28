@@ -10,7 +10,7 @@
 let s:configuration = edge#get_configuration()
 let s:palette = edge#get_palette(s:configuration.style)
 let s:path = expand('<sfile>:p') " the path of this script
-let s:last_modified = 'Tue Jan 26 03:31:57 AM UTC 2021'
+let s:last_modified = 'Tue Jun  8 11:25:38 PM UTC 2021'
 let g:edge_loaded_file_types = []
 
 if !(exists('g:colors_name') && g:colors_name ==# 'edge' && s:configuration.better_performance)
@@ -31,7 +31,11 @@ endif
 if s:configuration.transparent_background
   call edge#highlight('Normal', s:palette.fg, s:palette.none)
   call edge#highlight('Terminal', s:palette.fg, s:palette.none)
-  call edge#highlight('EndOfBuffer', s:palette.bg0, s:palette.none)
+  if s:configuration.show_eob
+    call edge#highlight('EndOfBuffer', s:palette.bg4, s:palette.none)
+  else
+    call edge#highlight('EndOfBuffer', s:palette.bg0, s:palette.none)
+  endif
   call edge#highlight('Folded', s:palette.grey, s:palette.none)
   call edge#highlight('ToolbarLine', s:palette.fg, s:palette.none)
   call edge#highlight('SignColumn', s:palette.fg, s:palette.none)
@@ -39,7 +43,11 @@ if s:configuration.transparent_background
 else
   call edge#highlight('Normal', s:palette.fg, s:palette.bg0)
   call edge#highlight('Terminal', s:palette.fg, s:palette.bg0)
-  call edge#highlight('EndOfBuffer', s:palette.bg0, s:palette.bg0)
+  if s:configuration.show_eob
+    call edge#highlight('EndOfBuffer', s:palette.bg4, s:palette.bg0)
+  else
+    call edge#highlight('EndOfBuffer', s:palette.bg0, s:palette.bg0)
+  endif
   call edge#highlight('Folded', s:palette.grey, s:palette.bg1)
   call edge#highlight('ToolbarLine', s:palette.fg, s:palette.bg2)
   if s:configuration.sign_column_background ==# 'default'
@@ -81,7 +89,7 @@ endif
 call edge#highlight('DiffAdd', s:palette.none, s:palette.diff_green)
 call edge#highlight('DiffChange', s:palette.none, s:palette.diff_blue)
 call edge#highlight('DiffDelete', s:palette.none, s:palette.diff_red)
-call edge#highlight('DiffText', s:palette.bg0, s:palette.fg)
+call edge#highlight('DiffText', s:palette.bg0, s:palette.blue)
 call edge#highlight('Directory', s:palette.green, s:palette.none)
 call edge#highlight('ErrorMsg', s:palette.red, s:palette.none, 'bold,underline')
 call edge#highlight('WarningMsg', s:palette.yellow, s:palette.none, 'bold')
@@ -133,10 +141,10 @@ if has('nvim')
   highlight! link LspDiagnosticsDefaultWarning WarningText
   highlight! link LspDiagnosticsDefaultInformation InfoText
   highlight! link LspDiagnosticsDefaultHint HintText
-  highlight! link LspDiagnosticsVirtualTextError Grey
-  highlight! link LspDiagnosticsVirtualTextWarning Grey
-  highlight! link LspDiagnosticsVirtualTextInformation Grey
-  highlight! link LspDiagnosticsVirtualTextHint Grey
+  highlight! link LspDiagnosticsVirtualTextError VirtualTextError
+  highlight! link LspDiagnosticsVirtualTextWarning VirtualTextWarning
+  highlight! link LspDiagnosticsVirtualTextInformation VirtualTextInfo
+  highlight! link LspDiagnosticsVirtualTextHint VirtualTextHint
   highlight! link LspDiagnosticsUnderlineError ErrorText
   highlight! link LspDiagnosticsUnderlineWarning WarningText
   highlight! link LspDiagnosticsUnderlineInformation InfoText
@@ -266,6 +274,17 @@ else
   highlight clear InfoLine
   highlight clear HintLine
 endif
+if s:configuration.diagnostic_virtual_text ==# 'grey'
+  highlight! link VirtualTextWarning Grey
+  highlight! link VirtualTextError Grey
+  highlight! link VirtualTextInfo Grey
+  highlight! link VirtualTextHint Grey
+else
+  highlight! link VirtualTextWarning Yellow
+  highlight! link VirtualTextError Red
+  highlight! link VirtualTextInfo Blue
+  highlight! link VirtualTextHint Green
+endif
 call edge#highlight('ErrorFloat', s:palette.red, s:palette.bg2)
 call edge#highlight('WarningFloat', s:palette.yellow, s:palette.bg2)
 call edge#highlight('InfoFloat', s:palette.blue, s:palette.bg2)
@@ -320,52 +339,60 @@ endif
 " }}}
 " Plugins: {{{
 " nvim-treesitter/nvim-treesitter {{{
+call edge#highlight('TSStrong', s:palette.none, s:palette.none, 'bold')
+call edge#highlight('TSEmphasis', s:palette.none, s:palette.none, 'bold')
+call edge#highlight('TSUnderline', s:palette.none, s:palette.none, 'underline')
+call edge#highlight('TSNote', s:palette.bg0, s:palette.blue, 'bold')
+call edge#highlight('TSWarning', s:palette.bg0, s:palette.yellow, 'bold')
+call edge#highlight('TSDanger', s:palette.bg0, s:palette.red, 'bold')
 highlight! link TSAnnotation Purple
 highlight! link TSAttribute Yellow
-highlight! link TSBoolean Yellow
+highlight! link TSBoolean Green
 highlight! link TSCharacter Green
-highlight! link TSComment Grey
+highlight! link TSComment Comment
 highlight! link TSConditional Purple
-highlight! link TSConstBuiltin YellowItalic
-highlight! link TSConstMacro Cyan
-highlight! link TSConstant YellowItalic
+highlight! link TSConstBuiltin CyanItalic
+highlight! link TSConstMacro CyanItalic
+highlight! link TSConstant RedItalic
 highlight! link TSConstructor Fg
 highlight! link TSError ErrorText
 highlight! link TSException Purple
 highlight! link TSField Blue
-highlight! link TSFloat Yellow
+highlight! link TSFloat Green
 highlight! link TSFuncBuiltin Blue
 highlight! link TSFuncMacro Blue
 highlight! link TSFunction Blue
-highlight! link TSInclude RedItalic
+highlight! link TSInclude Purple
 highlight! link TSKeyword Purple
 highlight! link TSKeywordFunction Purple
+highlight! link TSKeywordOperator Purple
 highlight! link TSLabel Purple
 highlight! link TSMethod Blue
-highlight! link TSNamespace YellowItalic
-highlight! link TSNumber Yellow
+highlight! link TSNamespace Yellow
+highlight! link TSNone Fg
+highlight! link TSNumber Green
 highlight! link TSOperator Purple
-highlight! link TSParameter CyanItalic
-highlight! link TSParameterReference CyanItalic
+highlight! link TSParameter RedItalic
+highlight! link TSParameterReference RedItalic
 highlight! link TSProperty Blue
 highlight! link TSPunctBracket Fg
 highlight! link TSPunctDelimiter Grey
-highlight! link TSPunctSpecial Fg
+highlight! link TSPunctSpecial Yellow
 highlight! link TSRepeat Purple
 highlight! link TSString Green
 highlight! link TSStringEscape Yellow
 highlight! link TSStringRegex Yellow
-highlight! link TSStructure RedItalic
+highlight! link TSSymbol Red
 highlight! link TSTag RedItalic
 highlight! link TSTagDelimiter Purple
 highlight! link TSText Green
-call edge#highlight('TSEmphasis', s:palette.none, s:palette.none, 'bold')
-call edge#highlight('TSUnderline', s:palette.none, s:palette.none, 'underline')
-highlight! link TSType RedItalic
-highlight! link TSTypeBuiltin RedItalic
+highlight! link TSStrike Grey
+highlight! link TSMath Green
+highlight! link TSType Yellow
+highlight! link TSTypeBuiltin Yellow
 highlight! link TSURI markdownUrl
-highlight! link TSVariable Fg
-highlight! link TSVariableBuiltin YellowItalic
+highlight! link TSVariable RedItalic
+highlight! link TSVariableBuiltin CyanItalic
 " }}}
 " neoclide/coc.nvim {{{
 call edge#highlight('CocHoverRange', s:palette.none, s:palette.none, 'bold,underline')
@@ -382,15 +409,17 @@ highlight! link CocErrorSign RedSign
 highlight! link CocWarningSign YellowSign
 highlight! link CocInfoSign BlueSign
 highlight! link CocHintSign GreenSign
-highlight! link CocWarningVirtualText Grey
-highlight! link CocErrorVirtualText Grey
-highlight! link CocInfoVirtualText Grey
-highlight! link CocHintVirtualText Grey
+highlight! link CocWarningVirtualText VirtualTextWarning
+highlight! link CocErrorVirtualText VirtualTextError
+highlight! link CocInfoVirtualText VirtualTextInfo
+highlight! link CocHintVirtualText VirtualTextHint
 highlight! link CocErrorLine ErrorLine
 highlight! link CocWarningLine WarningLine
 highlight! link CocInfoLine InfoLine
 highlight! link CocHintLine HintLine
 highlight! link CocCodeLens Grey
+highlight! link CocFadeOut Grey
+highlight! link CocStrikeThrough Grey
 highlight! link HighlightedyankRegion Visual
 highlight! link CocGitAddedSign GreenSign
 highlight! link CocGitChangeRemovedSign PurpleSign
@@ -434,10 +463,10 @@ highlight! link CocExplorerHelpDescription Grey
 highlight! link CocExplorerHelpHint Grey
 " }}}
 " prabirshrestha/vim-lsp {{{
-highlight! link LspErrorVirtual Grey
-highlight! link LspWarningVirtual Grey
-highlight! link LspInformationVirtual Grey
-highlight! link LspHintVirtual Grey
+highlight! link LspErrorVirtual VirtualTextError
+highlight! link LspWarningVirtual VirtualTextWarning
+highlight! link LspInformationVirtual VirtualTextInfo
+highlight! link LspHintVirtual VirtualTextHint
 highlight! link LspErrorHighlight ErrorText
 highlight! link LspWarningHighlight WarningText
 highlight! link LspInformationHighlight InfoText
@@ -462,11 +491,11 @@ highlight! link ALEInfoSign BlueSign
 highlight! link ALEErrorLine ErrorLine
 highlight! link ALEWarningLine WarningLine
 highlight! link ALEInfoLine InfoLine
-highlight! link ALEVirtualTextError Grey
-highlight! link ALEVirtualTextWarning Grey
-highlight! link ALEVirtualTextInfo Grey
-highlight! link ALEVirtualTextStyleError Grey
-highlight! link ALEVirtualTextStyleWarning Grey
+highlight! link ALEVirtualTextError VirtualTextError
+highlight! link ALEVirtualTextWarning VirtualTextWarning
+highlight! link ALEVirtualTextInfo VirtualTextInfo
+highlight! link ALEVirtualTextStyleError VirtualTextHint
+highlight! link ALEVirtualTextStyleWarning VirtualTextHint
 " }}}
 " neomake/neomake {{{
 highlight! link NeomakeError ErrorText
@@ -477,10 +506,10 @@ highlight! link NeomakeErrorSign RedSign
 highlight! link NeomakeWarningSign YellowSign
 highlight! link NeomakeInfoSign BlueSign
 highlight! link NeomakeMessageSign GreenSign
-highlight! link NeomakeVirtualtextError Grey
-highlight! link NeomakeVirtualtextWarning Grey
-highlight! link NeomakeVirtualtextInfo Grey
-highlight! link NeomakeVirtualtextMessag Grey
+highlight! link NeomakeVirtualtextError VirtualTextError
+highlight! link NeomakeVirtualtextWarning VirtualTextWarning
+highlight! link NeomakeVirtualtextInfo VirtualTextInfo
+highlight! link NeomakeVirtualtextMessag VirtualTextHint
 " }}}
 " vim-syntastic/syntastic {{{
 highlight! link SyntasticError ErrorText
@@ -501,10 +530,58 @@ call edge#highlight('Lf_hl_match2', s:palette.purple, s:palette.none, 'bold')
 call edge#highlight('Lf_hl_match3', s:palette.red, s:palette.none, 'bold')
 call edge#highlight('Lf_hl_match4', s:palette.yellow, s:palette.none, 'bold')
 call edge#highlight('Lf_hl_matchRefine', s:palette.cyan, s:palette.none, 'bold')
+call edge#highlight('Lf_hl_popup_normalMode', s:palette.bg0, s:palette.green, 'bold')
+call edge#highlight('Lf_hl_popup_inputMode', s:palette.bg0, s:palette.blue, 'bold')
+call edge#highlight('Lf_hl_popup_category', s:palette.fg, s:palette.bg4)
+call edge#highlight('Lf_hl_popup_nameOnlyMode', s:palette.fg, s:palette.bg3)
+call edge#highlight('Lf_hl_popup_fullPathMode', s:palette.fg, s:palette.bg3)
+call edge#highlight('Lf_hl_popup_fuzzyMode', s:palette.fg, s:palette.bg3)
+call edge#highlight('Lf_hl_popup_regexMode', s:palette.fg, s:palette.bg3)
+call edge#highlight('Lf_hl_popup_lineInfo', s:palette.purple, s:palette.bg4)
+call edge#highlight('Lf_hl_popup_total', s:palette.bg0, s:palette.purple)
+call edge#highlight('Lf_hl_popup_cursor', s:palette.bg0, s:palette.green)
 highlight! link Lf_hl_cursorline Fg
 highlight! link Lf_hl_selection DiffAdd
 highlight! link Lf_hl_rgHighlight Visual
 highlight! link Lf_hl_gtagsHighlight Visual
+highlight! link Lf_hl_popup_inputText Pmenu
+highlight! link Lf_hl_popup_window Pmenu
+highlight! link Lf_hl_popup_prompt Green
+highlight! link Lf_hl_popup_cwd Pmenu
+highlight! link Lf_hl_popup_blank Lf_hl_popup_window
+highlight! link Lf_hl_popup_spin Yellow
+" }}}
+" liuchengxu/vim-clap {{{
+call edge#highlight('ClapSelected', s:palette.red, s:palette.bg2, 'bold')
+call edge#highlight('ClapCurrentSelection', s:palette.blue, s:palette.bg2, 'bold')
+call edge#highlight('ClapSpinner', s:palette.purple, s:palette.bg2, 'bold')
+call edge#highlight('ClapBlines', s:palette.fg, s:palette.bg2)
+call edge#highlight('ClapProviderId', s:palette.fg, s:palette.bg2, 'bold')
+call edge#highlight('ClapMatches1', s:palette.red, s:palette.bg2, 'bold')
+call edge#highlight('ClapMatches2', s:palette.yellow, s:palette.bg2, 'bold')
+call edge#highlight('ClapMatches3', s:palette.cyan, s:palette.bg2, 'bold')
+call edge#highlight('ClapMatches4', s:palette.blue, s:palette.bg2, 'bold')
+call edge#highlight('ClapMatches5', s:palette.purple, s:palette.bg2, 'bold')
+call edge#highlight('ClapFuzzyMatches', s:palette.green, s:palette.bg2, 'bold')
+call edge#highlight('ClapNoMatchesFound', s:palette.red, s:palette.bg2, 'bold')
+highlight! link ClapInput Pmenu
+highlight! link ClapDisplay Pmenu
+highlight! link ClapPreview Pmenu
+highlight! link ClapFuzzyMatches1 ClapFuzzyMatches
+highlight! link ClapFuzzyMatches2 ClapFuzzyMatches
+highlight! link ClapFuzzyMatches3 ClapFuzzyMatches
+highlight! link ClapFuzzyMatches4 ClapFuzzyMatches
+highlight! link ClapFuzzyMatches5 ClapFuzzyMatches
+highlight! link ClapFuzzyMatches6 ClapFuzzyMatches
+highlight! link ClapFuzzyMatches7 ClapFuzzyMatches
+highlight! link ClapFuzzyMatches8 ClapFuzzyMatches
+highlight! link ClapFuzzyMatches9 ClapFuzzyMatches
+highlight! link ClapFuzzyMatches10 ClapFuzzyMatches
+highlight! link ClapFuzzyMatches11 ClapFuzzyMatches
+highlight! link ClapFuzzyMatches12 ClapFuzzyMatches
+highlight! link ClapBlinesLineNr Grey
+highlight! link ClapProviderColon ClapBlines
+highlight! link ClapProviderAbout ClapBlines
 " }}}
 " junegunn/fzf.vim {{{
 let g:fzf_colors = {
@@ -521,6 +598,12 @@ let g:fzf_colors = {
       \ 'spinner': ['fg', 'Yellow'],
       \ 'header': ['fg', 'Blue']
       \ }
+" }}}
+" nvim-telescope/telescope.nvim {{{
+call edge#highlight('TelescopeMatching', s:palette.green, s:palette.none, 'bold')
+highlight! link TelescopeBorder Grey
+highlight! link TelescopePromptPrefix Purple
+highlight! link TelescopeSelection DiffAdd
 " }}}
 " Shougo/denite.nvim{{{
 call edge#highlight('deniteMatchedChar', s:palette.green, s:palette.none, 'bold')
@@ -551,6 +634,12 @@ highlight! link SignifySignAdd GreenSign
 highlight! link SignifySignChange BlueSign
 highlight! link SignifySignDelete RedSign
 highlight! link SignifySignChangeDelete PurpleSign
+" }}}
+" lewis6991/gitsigns.nvim {{{
+highlight! link GitSignsAdd GreenSign
+highlight! link GitSignsChange BlueSign
+highlight! link GitSignsDelete RedSign
+highlight! link GitSignsChangeDelete PurpleSign
 " }}}
 " andymass/vim-matchup {{{
 call edge#highlight('MatchParenCur', s:palette.none, s:palette.none, 'bold')
@@ -636,22 +725,20 @@ highlight! link agitDiffRemove Red
 highlight! link agitDiffAdd Green
 highlight! link agitDiffHeader Purple
 " }}}
-" netrw {{{
-" https://www.vim.org/scripts/script.php?script_id=1075
-highlight! link netrwDir Green
-highlight! link netrwClassify Green
-highlight! link netrwLink Grey
-highlight! link netrwSymLink Fg
-highlight! link netrwExe Red
-highlight! link netrwComment Grey
-highlight! link netrwList Cyan
-highlight! link netrwHelpCmd Blue
-highlight! link netrwCmdSep Grey
-highlight! link netrwVersion Purple
-" }}}
 " }}}
 " Extended File Types: {{{
-" Note: To ensure that the `s:last_modified` variable is always up to date, you need to copy `.githooks/pre-commit` to `.git/hooks/pre-commit`.
+" Whitelist: {{{ File type optimizations that will always be loaded.
+" diff {{{
+highlight! link diffAdded Green
+highlight! link diffRemoved Red
+highlight! link diffChanged Blue
+highlight! link diffOldFile Green
+highlight! link diffNewFile Cyan
+highlight! link diffFile Yellow
+highlight! link diffLine Grey
+highlight! link diffIndexLine Yellow
+" }}}
+" }}}
 " Generate the `after/ftplugin` directory based on the comment tags in this file.
 " For example, the content between `ft_begin: sh/zsh` and `ft_end` will be placed in `after/ftplugin/sh/edge.vim` and `after/ftplugin/zsh/edge.vim`.
 if edge#ft_exists(s:path) " If the ftplugin exists.
@@ -735,6 +822,40 @@ highlight! link NERDTreeLinkTarget Green
 " https://github.com/justinmk/vim-dirvish
 highlight! link DirvishPathTail Blue
 highlight! link DirvishArg Green
+" ft_end }}}
+" ft_begin: NvimTree {{{
+" https://github.com/kyazdani42/nvim-tree.lua
+highlight! link NvimTreeSymlink Fg
+highlight! link NvimTreeFolderName Green
+highlight! link NvimTreeRootFolder Grey
+highlight! link NvimTreeFolderIcon Blue
+highlight! link NvimTreeEmptyFolderName Green
+highlight! link NvimTreeOpenedFolderName Green
+highlight! link NvimTreeExecFile Fg
+highlight! link NvimTreeOpenedFile Fg
+highlight! link NvimTreeSpecialFile Fg
+highlight! link NvimTreeImageFile Fg
+highlight! link NvimTreeMarkdownFile Fg
+highlight! link NvimTreeIndentMarker Grey
+highlight! link NvimTreeGitDirty Yellow
+highlight! link NvimTreeGitStaged Blue
+highlight! link NvimTreeGitMerge Cyan
+highlight! link NvimTreeGitRenamed Purple
+highlight! link NvimTreeGitNew Green
+highlight! link NvimTreeGitDeleted Red
+" ft_end }}}
+" ft_begin: netrw {{{
+" https://www.vim.org/scripts/script.php?script_id=1075
+highlight! link netrwDir Green
+highlight! link netrwClassify Green
+highlight! link netrwLink Grey
+highlight! link netrwSymLink Fg
+highlight! link netrwExe Red
+highlight! link netrwComment Grey
+highlight! link netrwList Cyan
+highlight! link netrwHelpCmd Blue
+highlight! link netrwCmdSep Grey
+highlight! link netrwVersion Purple
 " ft_end }}}
 " ft_begin: startify/quickmenu {{{
 " https://github.com/mhinz/vim-startify
@@ -1862,16 +1983,6 @@ highlight! link tomlKey Red
 highlight! link tomlBoolean Yellow
 highlight! link tomlString Green
 highlight! link tomlTableArray tomlTable
-" ft_end }}}
-" ft_begin: diff/git {{{
-highlight! link diffAdded Green
-highlight! link diffRemoved Red
-highlight! link diffChanged Blue
-highlight! link diffOldFile Green
-highlight! link diffNewFile Cyan
-highlight! link diffFile Yellow
-highlight! link diffLine Grey
-highlight! link diffIndexLine Yellow
 " ft_end }}}
 " ft_begin: gitcommit {{{
 highlight! link gitcommitSummary Purple

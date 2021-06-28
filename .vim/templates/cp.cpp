@@ -1,48 +1,63 @@
-#include<bits/stdc++.h>
+#include "bits/stdc++.h"
 using namespace std;
 
-const int M = 1e9+7;
-const int N = 1e5+12;
-typedef long long ll;
-typedef vector<int> vi;
-typedef pair<int,int> pi;
-#define F first
-#define S second
-#define pb push_back
-#define mp make_pair
-#define int ll
-#define fn(i,a,b) for (int i=a; i<=a; i++)
-void fileIO();
-long long fact[N];
+#define int long long
+#define endl "\n"
+#define all(x) x.begin(),x.end()
 
-void solve()
-{
-}
-
-void solveT()
-{
-  int t; cin>>t;
-  while(t--)
-  {
-  }
-}
-
-int32_t main()
-{
-  ios::sync_with_stdio(0);
-  cin.tie(0);
-
-  //solve();
-  //solveT();
-  return 0;
-}
-
-void fileIO()
-{
 #ifndef ONLINE_JUDGE
-    //for getting input from input.txt
-    freopen("input.txt", "r", stdin);
-    //for writing output to output.txt
-    freopen("output.txt", "w", stdout);
+#define deb(x) cerr<<#x<<"=>"; _print(x); cerr<<endl;
+#else
+#define deb(x)
 #endif
+
+void fastIO();
+void testCase();
+template<typename T>void _print(T n);
+template<class T>void _print(vector<T>v);
+template<typename... T>void read(T&... args);
+template<typename T>void readContainer(T &t);
+
+signed main() {
+    fastIO();
+#ifndef ONLINE_JUDGE
+    freopen(".deb.txt", "w", stderr);
+#endif
+    int T(1);
+    cin >> T;
+    while (T--) {
+        cerr<<endl;
+        testCase();
+    }
+    cerr<<endl;
+    cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
+}
+template <typename... T>void read(T &...args) {
+    ((cin>>args),...);
+}
+template<typename T>void readContainer(T&t) {
+    for(auto&e:t) {
+        read(e);
+    }
+}
+template<typename T>void _print(T n) {
+    cerr << n;
+}
+void fastIO() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+}
+
+template<typename T>void _print(vector<T> v) {
+    cerr << '[';
+    for (auto val : v) {
+        cerr << val;
+        cerr << ' ';
+    }
+    cerr << ']';
+}
+//----------------------------------------------------------------------------------------------------//
+
+void testCase(/* SampleTestCases!! */) {
 }
