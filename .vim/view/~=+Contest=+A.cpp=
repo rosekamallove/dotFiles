@@ -9,22 +9,22 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-13,18fold
-21,27fold
-63,94fold
+1,19fold
+22,28fold
+35,65fold
 let &fdl = &fdl
-13
+1
 normal! zo
-21
+22
 normal! zo
-63
+35
 normal! zo
-let s:l = 42 - ((41 * winheight(0) + 23) / 47)
+let s:l = 33 - ((10 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 42
-normal! 05|
+keepjumps 33
+normal! 014|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

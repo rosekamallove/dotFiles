@@ -21,16 +21,16 @@ set clipboard=unnamedplus
 set encoding=utf-8
 set wildmenu
 "set noshowmode
-set t_Co=16
+set t_Co=256
 " -- Searching -----------------------------------------------
 set ignorecase " Ignore case
 set smartcase  " Don't ignore case if uppercase letter present
 " -- BetterLineWrapping --------------------------------------
 set nowrap
 set linebreak
-set textwidth=0
+set textwidth=0 
 set wrapmargin=0
-"set nohlsearch 
+set nohlsearch 
 
 " -- VimPluginsUsingPlug -----------------------------------------
 call plug#begin()
@@ -62,17 +62,16 @@ Plug 'Yggdroot/indentLine'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'wakatime/vim-wakatime'
+Plug 'terryma/vim-multiple-cursors'
 "Plug 'codota/tabnine-vim'
 Plug 'bfrg/vim-cpp-modern'
-Plug 'mcchrish/nnn.vim'
 Plug 'voldikss/vim-floaterm'
-
 
 " -- SyntaxAndColorSchemes ---- 
 Plug 'sheerun/vim-polyglot'
 Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
 Plug 'sainnhe/everforest'
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 Plug 'rakr/vim-one'
 
 " -- CustomOperators ------------
@@ -80,9 +79,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'christoomey/vim-system-copy'
 
-" -- CompetitiveProgramming -----
-Plug 'p00f/cphelper.nvim'
-Plug 'nvim-lua/plenary.nvim'
 
 call plug#end()
 
@@ -101,6 +97,9 @@ let g:cpp_no_function_highlight = 0
 " -- ColorScheme -------------------------------------------------
 set termguicolors     
 set background=dark
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_light = 'soft'
+let ayucolor="dark"
 colorscheme one
 let g:lightline = {'colorscheme':'one'} 
 let g:everforest_background = 'soft'
@@ -108,8 +107,6 @@ nnoremap LIT :colorscheme everforest <bar> set background=light<CR>
 nnoremap SO :so ~/.vimrc<CR>
 let g:gruvbox_bold = 1
 let g:gruvbox_italic = 1
-let g:gruvbox_contrast_dark = 'medium'
-let g:gruvbox_contrast_light = 'medium'
 
 
 " -- KeyBindingsForResizingSplits -----------------------------
@@ -132,7 +129,7 @@ noremap ter  :bot terminal<CR>
 noremap splr :botright vert split<CR>
 noremap spl  :split<CR>
 nnoremap sv	 :w<CR>
-nnoremap FF :%!astyle<CR>
+nnoremap FF :%!astyle<CR><C-o>
 
 " -- Window Nav -----------------------------------------------
 nnoremap <C-H> <C-w>h
@@ -151,20 +148,29 @@ nnoremap cpb :
 			\!clear;
 			\cpb test %<CR>
 
-noremap RR : 
+noremap <F4> : 
 			\	!clear; 
-			\ echo "$(tput bold)Compiling... ";
+			\ echo "-------------------------";
+			\ echo "$(tput bold)Compiling";
+			\ echo "-------------------------";
 			\	g++ -Wall -std=c++17 % -o .a.out; 
-			\ echo "$(tput bold)Running...";
+			\ clear;
+			\ echo "-------------------------";
+			\ echo "$(tput bold)Running";
+			\ echo "-------------------------";
 			\	./.a.out; 
 			\ echo "\n";
+			\ echo "-------------------------";
 			\ echo "Deb:";
+			\ echo "-------------------------";
 			\	cat .deb.txt
 			\<CR>
 
-noremap RT :
+noremap <F3> :
 			\!clear;
-			\ echo "$(tput bold)Compiling... ";
+			\ echo "-------------------------";
+			\ echo "$(tput bold)Compiling";
+			\ echo "-------------------------";
 			\g++  -Wall -std=c++17 % -o .Z.out;
 			\./.Z.out < .zin.txt > .zot.md;
 			\diff .zex.txt .zot.md > .zdf.txt<CR>
@@ -254,19 +260,8 @@ autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
 
 
-" -- NNN ---------------------------------------------------------------------
-" Disable default mappings
-let g:nnn#set_default_mappings = 0
-
-" Start n³ in the current file's directory
-nnoremap <space>n :NnnPicker %:p:h<CR>
-
-" Floating window (neovim latest and vim with patch 8.2.191)
-let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Debug' } }
-
-let g:nnn#action = {
-			\ '<c-t>': 'tab split',
-			\ '<c-x>': 'split',
-			\ '<c-v>': 'vsplit' }
-
+" -- FloatTem ----------------------------------------------------------------
 let g:floaterm_keymap_toggle = '<F12>'
+
+iabbrev obj var foo = {};<Left><Left>
+
